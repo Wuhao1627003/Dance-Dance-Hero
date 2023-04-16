@@ -50,7 +50,8 @@ public class BeatProvider : MonoBehaviour
         long duration = getDuration();
         if (duration != -1) {
             Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
-            sphere.transform.position += Vector3.down;
+            sphere.transform.localScale *= 2;
+            Invoke("RecoverScale", 0.1f);
         }
     }
 
@@ -66,5 +67,10 @@ public class BeatProvider : MonoBehaviour
             Vector3 end = new Vector3(i, spectrum[i], 0);
             Debug.DrawLine(start, end);
         }
+    }
+
+    void RecoverScale()
+    {
+        sphere.transform.localScale /= 2;
     }
 }

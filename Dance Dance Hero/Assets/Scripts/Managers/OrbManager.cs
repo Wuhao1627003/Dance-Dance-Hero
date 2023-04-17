@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrbManager : MonoBehaviour
 {
-    
+    public GameObject orb;
     // Start is called before the first frame update
     void Start()
     {

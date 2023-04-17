@@ -14,7 +14,7 @@ public class Orb : MonoBehaviour
             Vector3 startPosition = transform.position;
             float radius = 2;
             Vector3 randomPointOnEarth = Random.insideUnitSphere * radius;
-            velocity = (startPosition - randomPointOnEarth).normalized;
+            velocity = (randomPointOnEarth - startPosition).normalized;
         }
 
         velocity *= speed;
@@ -24,5 +24,15 @@ public class Orb : MonoBehaviour
     public void onBeatUpdate()
     {
         transform.position += velocity;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("GameController"))
+        {
+            Vector3 normal = collision.gameObject.transform.position.normalized;
+            velocity = Vector3.Reflect(velocity.normalized, normal) * speed;
+            GetComponent<Rigidbody>().AddForce(velocity * 3);
+        }
     }
 }

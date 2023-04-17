@@ -12,7 +12,7 @@ public class Orb : MonoBehaviour
         if (randomizeDirection)
         {
             Vector3 startPosition = transform.position;
-            float radius = 50;
+            float radius = 2;
             Vector3 randomPointOnEarth = Random.insideUnitSphere * radius;
             velocity = (startPosition - randomPointOnEarth).normalized;
         }

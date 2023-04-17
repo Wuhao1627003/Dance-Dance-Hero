@@ -72,4 +72,4 @@ Dance Dance Hero/[Aa]ssets/[Ss]treamingAssets/aa.meta
 Dance Dance Hero/[Aa]ssets/[Ss]treamingAssets/aa/*
 *.log
 Dance Dance Hero/Library/Artifacts/*
-Dance Dance Hero/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json
+Dance Dance Hero/ProjectSettings/Packages/*

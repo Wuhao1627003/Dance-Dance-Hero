@@ -51,6 +51,7 @@ public class BeatProvider : MonoBehaviour
         if (duration != -1) {
             Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
             sphere.transform.localScale *= 2;
+            sphere.GetComponent<Orb>().onBeatUpdate();
             Invoke("RecoverScale", 0.1f);
         }
     }

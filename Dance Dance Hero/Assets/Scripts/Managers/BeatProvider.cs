@@ -5,7 +5,7 @@ using UnityEngine;
 public class BeatProvider : MonoBehaviour
 {
     public int maxBeatsPerSecond = 2;
-    private GameObject sphere;
+    private GameObject orb;
     private long startTime;
     private long lastTime;
     private int beatsThisSecond = 0;
@@ -19,7 +19,7 @@ public class BeatProvider : MonoBehaviour
         processor.onSpectrum.AddListener(onSpectrum);
         startTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerSecond;
         lastTime = startTime;
-        sphere = GameObject.Find("Sphere");
+        orb = GameObject.Find("Orb");
     }
 
     private long getDuration()
@@ -51,7 +51,7 @@ public class BeatProvider : MonoBehaviour
         if (duration != -1) {
             Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
             //sphere.transform.localScale *= 2;
-            sphere.GetComponent<Orb>().onBeatUpdate();
+            orb.GetComponent<Orb>().onBeatUpdate();
             //Invoke("RecoverScale", 0.1f);
         }
     }
@@ -72,6 +72,6 @@ public class BeatProvider : MonoBehaviour
 
     void RecoverScale()
     {
-        sphere.transform.localScale /= 2;
+        orb.transform.localScale /= 2;
     }
 }

@@ -13,7 +13,7 @@ public class Orb : MonoBehaviour
         if (randomizeDirection)
         {
             Vector3 startPosition = transform.position;
-            float radius = 2;
+            float radius = GameObject.Find("Earth").GetComponent<SphereCollider>().radius * 0.6f;
             Vector3 randomPointOnEarth = Random.insideUnitSphere * radius;
             velocity = (randomPointOnEarth - startPosition).normalized;
         }
@@ -28,18 +28,25 @@ public class Orb : MonoBehaviour
         {
             transform.position += velocity;
         }
+        if ((transform.position - GameObject.Find("Main Camera").transform.position).magnitude > 20) {
+            Destroy(gameObject);
+        }
         
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.LogError(other.tag + other.name);
         if (other.CompareTag("GameController"))
         {
             Vector3 normal = other.transform.position.normalized;
             velocity = Vector3.Reflect(velocity.normalized, normal) * speed;
-            GetComponent<Rigidbody>().AddForce(velocity * 30);
+            GetComponent<Rigidbody>().AddForce(velocity * 300);
             punched = true;
+        }
+        else if (other.CompareTag("Earth"))
+        {
+            Debug.LogError("Hit Earth!");
+            Destroy(gameObject);
         }
     }
 }

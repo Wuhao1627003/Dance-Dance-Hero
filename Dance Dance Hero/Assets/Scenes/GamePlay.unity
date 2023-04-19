@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 676322997}
   - component: {fileID: 676322996}
   - component: {fileID: 676323000}
+  - component: {fileID: 676323001}
   m_Layer: 0
   m_Name: GlobalObject
   m_TagString: Untagged
@@ -691,6 +692,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orb: {fileID: 7833677552040238506, guid: f88d04f916bbfc04cb6a6ff9af511d57, type: 3}
+  scoreForOnBeatHit: 2
+  scoreForOffBeatHit: 1
+--- !u!114 &676323001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676322995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfb9fdd7a045484d9610fdc142938f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sun: {fileID: 3026985059292714182, guid: dab4519764be4bc4ea1332505239870d, type: 3}
+  kryptonite: {fileID: 8116044227602129018, guid: f59698b871f32794fb445dfeb4cae99d,
+    type: 3}
+  recoverTime: 3
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,9 @@ public class OrbManager : MonoBehaviour
 {
     public GameObject orb;
     private Camera cam;
+    public int scoreForOnBeatHit = 2;
+    public int scoreForOffBeatHit = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,5 +30,21 @@ public class OrbManager : MonoBehaviour
     void spawnOrbs()
     {
         //cam.transform.position.y
+    }
+
+    public void HandlePunch()
+    {
+        int score;
+        SunKryptoManager manager = GameObject.Find("GlobalObject").GetComponent<SunKryptoManager>();
+        bool onBeat = GameObject.Find("GlobalObject").GetComponent<BeatProvider>().onBeat;
+        if (onBeat)
+        {
+            score = manager.punishOnBeat ? scoreForOffBeatHit : scoreForOnBeatHit;
+        }
+        else
+        {
+            score = manager.punishOffBeat ? scoreForOffBeatHit : scoreForOnBeatHit;
+        }
+        GameObject.Find("Score").GetComponent<Score>().IncreaseScore(score);
     }
 }

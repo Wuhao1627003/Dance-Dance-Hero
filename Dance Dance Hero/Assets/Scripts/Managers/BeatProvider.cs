@@ -9,6 +9,7 @@ public class BeatProvider : MonoBehaviour
     private long startTime;
     private long lastTime;
     private int beatsThisSecond = 0;
+    public bool onBeat {get; private set;}
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class BeatProvider : MonoBehaviour
         processor.onSpectrum.AddListener(onSpectrum);
         startTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerSecond;
         lastTime = startTime;
+        onBeat = false;
         orb = GameObject.Find("Orb");
     }
 
@@ -52,7 +54,8 @@ public class BeatProvider : MonoBehaviour
             Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
             //sphere.transform.localScale *= 2;
             orb.GetComponent<Orb>().onBeatUpdate();
-            //Invoke("RecoverScale", 0.1f);
+            onBeat = true;
+            Invoke(nameof(RecoverOnBeat), 0.2f);
         }
     }
 
@@ -70,8 +73,8 @@ public class BeatProvider : MonoBehaviour
         }
     }
 
-    void RecoverScale()
+    void RecoverOnBeat()
     {
-        orb.transform.localScale /= 2;
+        onBeat = false;
     }
 }

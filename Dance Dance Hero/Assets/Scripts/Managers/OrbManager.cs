@@ -6,6 +6,7 @@ using UnityEngine;
 public class OrbManager : MonoBehaviour
 {
     public GameObject orb;
+    public float radius { get { return GameObject.Find("EarthRendering").GetComponent<SphereCollider>().radius * 0.6f; } }
     private Camera cam;
     public int scoreForOnBeatHit = 2;
     public int scoreForOffBeatHit = 1;
@@ -35,7 +36,7 @@ public class OrbManager : MonoBehaviour
     public void HandlePunch()
     {
         int score;
-        SunKryptoManager manager = GameObject.Find("GlobalObject").GetComponent<SunKryptoManager>();
+        ItemManager manager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
         bool onBeat = GameObject.Find("GlobalObject").GetComponent<BeatProvider>().onBeat;
         if (onBeat)
         {

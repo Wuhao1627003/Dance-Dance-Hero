@@ -13,7 +13,7 @@ public class Orb : MonoBehaviour
         if (randomizeDirection)
         {
             Vector3 startPosition = transform.position;
-            float radius = GameObject.Find("Earth").GetComponent<SphereCollider>().radius * 0.6f;
+            float radius = GameObject.Find("GlobalObject").GetComponent<OrbManager>().radius;
             Vector3 randomPointOnEarth = Random.insideUnitSphere * radius;
             velocity = (randomPointOnEarth - startPosition).normalized;
         }

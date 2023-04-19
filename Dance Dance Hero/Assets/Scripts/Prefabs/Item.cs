@@ -1,19 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
+
     public bool randomizeDirection = false;
     public float speed = 0.1f;
-    private Vector3 velocity = Vector3.down;
+    public Vector3 velocity = Vector3.down;
 
     void Start()
     {
+        float radius = GameObject.Find("GlobalObject").GetComponent<OrbManager>().radius;
+        Vector2 randomPointOnCircle = Random.insideUnitCircle * radius * 1.2f;
+        transform.position = new(randomPointOnCircle.x, GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition.y + 5.0f, randomPointOnCircle.y);
+
         if (randomizeDirection)
         {
-            Vector3 startPosition = transform.position;
-            float radius = GameObject.Find("Earth").GetComponent<SphereCollider>().radius * 0.6f;
             Vector3 randomPointOnEarth = Random.insideUnitSphere * radius;
-            velocity = (randomPointOnEarth - startPosition).normalized;
+            velocity = (randomPointOnEarth - transform.position).normalized;
         }
 
         velocity *= speed;

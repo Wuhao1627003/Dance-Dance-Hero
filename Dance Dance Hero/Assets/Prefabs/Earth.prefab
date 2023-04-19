@@ -89,7 +89,7 @@ Transform:
   - {fileID: 420960}
   - {fileID: 431172}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114431905216721126
 MonoBehaviour:
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 3361438}
   - component: {fileID: 2353574}
   - component: {fileID: 359446476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EarthRendering
   m_TagString: Earth
   m_Icon: {fileID: 0}

@@ -3,17 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Earth
+  - Orb
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Orb
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Item
+  - Controller
+  - Earth
   - 
   - 
   - 

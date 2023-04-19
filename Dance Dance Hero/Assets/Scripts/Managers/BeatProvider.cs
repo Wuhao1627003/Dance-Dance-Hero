@@ -53,9 +53,14 @@ public class BeatProvider : MonoBehaviour
         if (duration != -1) {
             Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
             //sphere.transform.localScale *= 2;
-            orb.GetComponent<Orb>().onBeatUpdate();
+            if (orb)
+            {
+                orb.GetComponent<Orb>().onBeatUpdate();
+            }
+            
             onBeat = true;
             Invoke(nameof(RecoverOnBeat), 0.2f);
+            GameObject.Find("GlobalObject").GetComponent<ItemManager>().SpawnSomething();
         }
     }
 

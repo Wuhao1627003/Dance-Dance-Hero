@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class SunKryptoManager : MonoBehaviour
+public class ItemManager : MonoBehaviour
 {
     public GameObject sun, kryptonite;
     public float recoverTime = 3.0f;
+    public Vector3 initialCameraPosition { get; private set; }
     public bool punishOffBeat { get; private set; }
     public bool punishOnBeat { get; private set; }
 
@@ -11,22 +12,30 @@ public class SunKryptoManager : MonoBehaviour
     {
         punishOffBeat = true;
         punishOnBeat = false;
+        initialCameraPosition = GameObject.Find("Main Camera").transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SpawnSomething()
     {
-        
+        float rand = Random.value;
+        if (rand < 0.1)
+        {
+            SpawnSun();
+        }
+        else if (rand > 0.9)
+        {
+            SpawnKryptonite();
+        }
     }
 
     void SpawnSun()
     {
-
+        Instantiate(sun);
     }
 
     void SpawnKryptonite()
     {
-
+        Instantiate(kryptonite);
     }
 
     public void HandleGrabSun()

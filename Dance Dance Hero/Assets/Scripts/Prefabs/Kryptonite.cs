@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Kryptonite : Item
 {
-    public override void HandleItem()
+    public override void HandleGrab()
     {
         GameObject.Find("GlobalObject").GetComponent<ItemManager>().HandleGrabKryptonite();
         Debug.Log("Grabbed Krypto");

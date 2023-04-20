@@ -41,6 +41,19 @@ public abstract class Item : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (gameObject.GetComponent<Orb>())
+        {
+            GameObject.Find("GlobalObject").GetComponent<OrbManager>().orbs.Remove(gameObject.GetComponent<Orb>());
+        }
+        else
+        {
+            GameObject.Find("GlobalObject").GetComponent<ItemManager>().items.Remove(gameObject.GetComponent<Item>());
+        }
+        Destroy(gameObject);
+    }
+
     public abstract void HandleGrab();
     public virtual void HandleEarthCollision() {}
 }

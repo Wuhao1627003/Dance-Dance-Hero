@@ -1,20 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.XR.XRInputSubsystem;
 
 public class OrbManager : MonoBehaviour
 {
     public GameObject orb;
     public float radius { get { return GameObject.Find("EarthRendering").GetComponent<SphereCollider>().radius * 0.6f; } }
-    private Camera cam;
     public int scoreForOnBeatHit = 2;
     public int scoreForOffBeatHit = 1;
+    public List<Orb> orbs = new List<Orb>();
 
-    // Start is called before the first frame update
     void Start()
     {
-        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         //UnityEngine.XR.XRInputSubsystem
 
         // heights vary from abt 1.3-1.8 spawn orbs around 2
@@ -32,18 +28,20 @@ public class OrbManager : MonoBehaviour
         // 5 seconds of silence at beginning
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void spawnOrb()
+    public void SpawnOrb()
     {
         float rand = Random.value;
-        if (rand < 0.5)
+        if (rand < 0.05)
         {
-            Instantiate(orb);
+            orbs.Add(Instantiate(orb).GetComponent<Orb>());
+        }
+    }
+
+    public void onBeatUpdate()
+    {
+        foreach (Orb orb in orbs)
+        {
+            orb.onBeatUpdate();
         }
     }
 

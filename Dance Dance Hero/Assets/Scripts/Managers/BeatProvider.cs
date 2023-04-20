@@ -51,18 +51,18 @@ public class BeatProvider : MonoBehaviour
     {
         long duration = getDuration();
         if (duration != -1) {
-            Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
-            //sphere.transform.localScale *= 2;
-            if (orb)
-            {
-                orb.GetComponent<Orb>().onBeatUpdate();
-            }
+            //Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
             
             onBeat = true;
             Invoke(nameof(RecoverOnBeat), 0.2f);
-            ItemManager manager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
-            manager.SpawnSomething();
-            manager.onBeatUpdate();
+
+            OrbManager orbManager = GameObject.Find("GlobalObject").GetComponent<OrbManager>();
+            orbManager.SpawnOrb();
+            orbManager.onBeatUpdate();
+
+            ItemManager itemManager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
+            itemManager.SpawnSomething();
+            itemManager.onBeatUpdate();
         }
     }
 

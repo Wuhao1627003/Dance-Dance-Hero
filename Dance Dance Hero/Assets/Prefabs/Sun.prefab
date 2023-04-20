@@ -30,11 +30,11 @@ Transform:
   m_GameObject: {fileID: 3026985059292714182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4896648303310480697
 MonoBehaviour:
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomizeDirection: 1
-  speed: 0.1
+  speed: 0.3
   velocity: {x: 0, y: -1, z: 0}
 --- !u!23 &-2292777454259116060
 MeshRenderer:

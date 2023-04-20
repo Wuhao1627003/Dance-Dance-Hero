@@ -11,7 +11,7 @@ public abstract class Item : MonoBehaviour
     {
         float radius = GameObject.Find("GlobalObject").GetComponent<OrbManager>().radius;
         Vector2 randomPointOnCircle = Random.insideUnitCircle * radius * 1.2f;
-        transform.position = new(randomPointOnCircle.x, GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition.y + 2.5f, randomPointOnCircle.y);
+        transform.position = new(randomPointOnCircle.x, GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition.y + 1.5f, randomPointOnCircle.y);
 
         if (randomizeDirection)
         {
@@ -39,6 +39,19 @@ public abstract class Item : MonoBehaviour
             HandleEarthCollision();
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (gameObject.GetComponent<Orb>())
+        {
+            GameObject.Find("GlobalObject").GetComponent<OrbManager>().orbs.Remove(gameObject.GetComponent<Orb>());
+        }
+        else
+        {
+            GameObject.Find("GlobalObject").GetComponent<ItemManager>().items.Remove(gameObject.GetComponent<Item>());
+        }
+        Destroy(gameObject);
     }
 
     public abstract void HandleGrab();

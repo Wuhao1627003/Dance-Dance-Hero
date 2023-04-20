@@ -8,7 +8,7 @@ public class ItemManager : MonoBehaviour
     public Vector3 initialCameraPosition { get; private set; }
     public bool punishOffBeat { get; private set; }
     public bool punishOnBeat { get; private set; }
-    private List<Item> items = new List<Item>();
+    public List<Item> items = new List<Item>();
 
     void Start()
     {
@@ -20,11 +20,11 @@ public class ItemManager : MonoBehaviour
     public void SpawnSomething()
     {
         float rand = Random.value;
-        if (rand < 0.1)
+        if (rand < 0.05)
         {
             SpawnSun();
         }
-        else if (rand > 0.9)
+        else if (rand > 0.95)
         {
             SpawnKryptonite();
         }
@@ -34,10 +34,7 @@ public class ItemManager : MonoBehaviour
     {
         foreach (Item item in items)
         {
-            if (item != null && item.isActiveAndEnabled)
-            {
-                item.onBeatUpdate();
-            }
+            item.onBeatUpdate();
         }
     }
 
@@ -55,6 +52,7 @@ public class ItemManager : MonoBehaviour
     {
         punishOffBeat = false;
         punishOnBeat = false;
+        GameObject.Find("Score").GetComponent<Score>().IncreaseScore(1);
         Invoke(nameof(RecoverPunishOffBeat), recoverTime);
     }
 

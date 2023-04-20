@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class ItemManager : MonoBehaviour
     public Vector3 initialCameraPosition { get; private set; }
     public bool punishOffBeat { get; private set; }
     public bool punishOnBeat { get; private set; }
+    private List<Item> items = new List<Item>();
 
     void Start()
     {
@@ -28,14 +30,25 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    public void onBeatUpdate()
+    {
+        foreach (Item item in items)
+        {
+            if (item != null && item.isActiveAndEnabled)
+            {
+                item.onBeatUpdate();
+            }
+        }
+    }
+
     void SpawnSun()
     {
-        Instantiate(sun);
+        items.Add(Instantiate(sun).GetComponent<Item>());
     }
 
     void SpawnKryptonite()
     {
-        Instantiate(kryptonite);
+        items.Add(Instantiate(kryptonite).GetComponent<Item>());
     }
 
     public void HandleGrabSun()

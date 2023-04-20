@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomizeDirection: 1
-  speed: 0.01
+  speed: 0.1
   velocity: {x: 0, y: -1, z: 0}
 --- !u!33 &431875286528304726
 MeshFilter:

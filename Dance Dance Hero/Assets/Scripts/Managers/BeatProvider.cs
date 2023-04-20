@@ -60,7 +60,9 @@ public class BeatProvider : MonoBehaviour
             
             onBeat = true;
             Invoke(nameof(RecoverOnBeat), 0.2f);
-            GameObject.Find("GlobalObject").GetComponent<ItemManager>().SpawnSomething();
+            ItemManager manager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
+            manager.SpawnSomething();
+            manager.onBeatUpdate();
         }
     }
 

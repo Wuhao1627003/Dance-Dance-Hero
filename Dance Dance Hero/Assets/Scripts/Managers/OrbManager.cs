@@ -8,7 +8,7 @@ public class OrbManager : MonoBehaviour
     public int scoreForOnBeatHit = 2;
     public int scoreForOffBeatHit = 1;
     public List<Orb> orbs = new List<Orb>();
-
+    public Material orbCol;
     public int stage = 0;
 
     void Start()
@@ -56,10 +56,7 @@ public class OrbManager : MonoBehaviour
 
     public void onBeatUpdate()
     {
-        // foreach (Orb orb in orbs)
-        // {
-        //     orb.onBeatUpdate();
-        // }
+        Pulse();
     }
 
     public void HandlePunch()
@@ -77,4 +74,16 @@ public class OrbManager : MonoBehaviour
         }
         GameObject.Find("Score").GetComponent<Score>().IncreaseScore(score);
     }
+    public void Pulse()
+    {
+        orbCol.SetColor("_Color", Color.red);
+
+        Invoke(nameof(ColorReturn), 0.2f);
+    }
+
+    private void ColorReturn()
+    {
+        orbCol.SetColor("_Color", Color.black);
+    }
+
 }

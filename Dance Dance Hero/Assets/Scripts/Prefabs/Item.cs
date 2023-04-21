@@ -4,7 +4,7 @@ public abstract class Item : MonoBehaviour
 {
 
     public bool randomizeDirection = false;
-    public float speed = 1.5f;
+    public float speed = 0.2f;
     public Vector3 velocity = Vector3.down;
     public AudioClip spawnAudio;
 
@@ -13,7 +13,10 @@ public abstract class Item : MonoBehaviour
         float radius = GameObject.Find("GlobalObject").GetComponent<OrbManager>().radius;
         Vector2 randomPointOnCircle = Random.insideUnitCircle * radius * 1.2f;
         transform.position = new(randomPointOnCircle.x, GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition.y + 1.5f, randomPointOnCircle.y);
-        AudioSource.PlayClipAtPoint(spawnAudio, transform.position);
+        if (spawnAudio != null)
+        {
+            AudioSource.PlayClipAtPoint(spawnAudio, transform.position);
+        }
         if (randomizeDirection)
         {
             Vector3 randomPointOnEarth = Random.insideUnitSphere * radius;
@@ -23,9 +26,13 @@ public abstract class Item : MonoBehaviour
         velocity *= speed;
     }
 
-    public virtual void onBeatUpdate()
+    // public virtual void onBeatUpdate()
+    // {
+    //     transform.position += velocity;
+    // }
+    public void Update()
     {
-        transform.position += velocity;
+        transform.position += velocity * Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider other)
@@ -44,15 +51,21 @@ public abstract class Item : MonoBehaviour
 
     private void OnDestroy()
     {
+        var go = GameObject.Find("GlobalObject");
+
+        if (go == null)
+        {
+            return;
+        }
+
         if (gameObject.GetComponent<Orb>())
         {
-            GameObject.Find("GlobalObject").GetComponent<OrbManager>().orbs.Remove(gameObject.GetComponent<Orb>());
+            go.GetComponent<OrbManager>().orbs.Remove(gameObject.GetComponent<Orb>());
         }
         else
         {
-            GameObject.Find("GlobalObject").GetComponent<ItemManager>().items.Remove(gameObject.GetComponent<Item>());
+            go.GetComponent<ItemManager>().items.Remove(gameObject.GetComponent<Item>());
         }
-        Destroy(gameObject);
     }
 
     public abstract void HandleGrab();

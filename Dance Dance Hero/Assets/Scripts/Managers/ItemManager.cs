@@ -33,10 +33,10 @@ public class ItemManager : MonoBehaviour
 
     public void onBeatUpdate()
     {
-        foreach (Item item in items)
-        {
-            item.onBeatUpdate();
-        }
+        // foreach (Item item in items)
+        // {
+        //     item.onBeatUpdate();
+        // }
     }
 
     void SpawnSun()

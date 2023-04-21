@@ -9,6 +9,8 @@ public class OrbManager : MonoBehaviour
     public int scoreForOffBeatHit = 1;
     public List<Orb> orbs = new List<Orb>();
 
+    public int stage = 0;
+
     void Start()
     {
         //UnityEngine.XR.XRInputSubsystem
@@ -31,18 +33,33 @@ public class OrbManager : MonoBehaviour
     public void SpawnOrb()
     {
         float rand = Random.value;
-        if (rand < 0.05)
+        if (stage < 0)
         {
-            orbs.Add(Instantiate(orb).GetComponent<Orb>());
+            if (rand < 0.3)
+            {
+                orbs.Add(Instantiate(orb).GetComponent<Orb>());
+            }
+        } else if (stage == 1)
+        {
+            if (rand < 0.35)
+            {
+                orbs.Add(Instantiate(orb).GetComponent<Orb>());
+            }
+        } else
+        {
+            if (rand < 0.4)
+            {
+                orbs.Add(Instantiate(orb).GetComponent<Orb>());
+            }
         }
     }
 
     public void onBeatUpdate()
     {
-        foreach (Orb orb in orbs)
-        {
-            orb.onBeatUpdate();
-        }
+        // foreach (Orb orb in orbs)
+        // {
+        //     orb.onBeatUpdate();
+        // }
     }
 
     public void HandlePunch()

@@ -63,6 +63,11 @@ public class BeatProvider : MonoBehaviour
             ItemManager itemManager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
             itemManager.SpawnSomething();
             itemManager.onBeatUpdate();
+
+            if (duration > 25)
+            {
+                orbManager.stage = 1;
+            }
         }
     }
 

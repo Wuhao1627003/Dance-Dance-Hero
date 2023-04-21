@@ -113,6 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomizeDirection: 0
   speed: 0.3
+  velocity: {x: 0, y: -1, z: 0}
+  spawnAudio: {fileID: 8300000, guid: a32e32f0615f3704ebb912b554c5da35, type: 3}
 --- !u!54 &1726975711845145495
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -30,7 +30,7 @@ public class OrbManager : MonoBehaviour
     {
         int score;
         ItemManager manager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
-        bool onBeat = GameObject.Find("GlobalObject").GetComponent<BeatProvider>().onBeat;
+        bool onBeat = GameObject.Find("Main Camera").GetComponent<BeatProvider>().onBeat;
         if (onBeat)
         {
             score = manager.punishOnBeat ? scoreForOffBeatHit : scoreForOnBeatHit;

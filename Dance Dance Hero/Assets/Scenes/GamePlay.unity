@@ -631,7 +631,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.016666668
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -686,6 +686,7 @@ MonoBehaviour:
   orb: {fileID: 7833677552040238506, guid: f88d04f916bbfc04cb6a6ff9af511d57, type: 3}
   scoreForOnBeatHit: 2
   scoreForOffBeatHit: 1
+  orbs: []
 --- !u!114 &676323001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,6 +703,7 @@ MonoBehaviour:
   kryptonite: {fileID: 8116044227602129018, guid: f59698b871f32794fb445dfeb4cae99d,
     type: 3}
   recoverTime: 3
+  items: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

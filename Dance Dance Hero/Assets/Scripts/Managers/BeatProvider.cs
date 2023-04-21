@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static AudioProcessor;
 
-public class BeatProvider : MonoBehaviour
+public class BeatProvider : MonoBehaviour, AudioCallbacks
 {
     public int maxBeatsPerSecond = 2;
     private GameObject orb;
@@ -15,10 +16,9 @@ public class BeatProvider : MonoBehaviour
     {
         //Select the instance of AudioProcessor and pass a reference
         //to this object
-        AudioProcessor processor = GameObject.Find("GlobalObject").GetComponent<AudioProcessor>();
-        processor.onBeat.AddListener(onOnbeatDetected);
-        processor.onSpectrum.AddListener(onSpectrum);
-        startTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerSecond;
+        AudioProcessor processor = GameObject.Find("Main Camera").GetComponent<AudioProcessor>();
+        processor.addAudioCallback(this);
+        startTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerMillisecond;
         lastTime = startTime;
         onBeat = false;
         orb = GameObject.Find("Orb");
@@ -26,9 +26,9 @@ public class BeatProvider : MonoBehaviour
 
     private long getDuration()
     {
-        long currentTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerSecond;
+        long currentTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerMillisecond;
         long duration = currentTime - startTime;
-        if (currentTime == lastTime)
+        if (currentTime - lastTime < 1000)
         {
             beatsThisSecond++;
             if (beatsThisSecond > maxBeatsPerSecond)
@@ -47,11 +47,11 @@ public class BeatProvider : MonoBehaviour
     //this event will be called every time a beat is detected.
     //Change the threshold parameter in the inspector
     //to adjust the sensitivity
-    void onOnbeatDetected()
+    void AudioCallbacks.onOnbeatDetected()
     {
         long duration = getDuration();
         if (duration != -1) {
-            //Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
+            Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
             
             onBeat = true;
             Invoke(nameof(RecoverOnBeat), 0.2f);
@@ -72,7 +72,7 @@ public class BeatProvider : MonoBehaviour
     }
 
     //This event will be called every frame while music is playing
-    void onSpectrum(float[] spectrum)
+    void AudioCallbacks.onSpectrum(float[] spectrum)
     {
         //The spectrum is logarithmically averaged
         //to 12 bands

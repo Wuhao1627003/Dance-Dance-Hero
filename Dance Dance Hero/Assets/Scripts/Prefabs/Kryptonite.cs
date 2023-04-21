@@ -5,6 +5,6 @@ public class Kryptonite : Item
     public override void HandleGrab()
     {
         GameObject.Find("GlobalObject").GetComponent<ItemManager>().HandleGrabKryptonite();
-        Debug.Log("Grabbed Krypto");
+        //Debug.Log("Grabbed Krypto");
     }
 }

@@ -5,6 +5,7 @@ public class ItemManager : MonoBehaviour
 {
     public GameObject sun, kryptonite;
     public float recoverTime = 3.0f;
+    
     public Vector3 initialCameraPosition { get; private set; }
     public bool punishOffBeat { get; private set; }
     public bool punishOnBeat { get; private set; }

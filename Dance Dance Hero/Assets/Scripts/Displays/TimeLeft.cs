@@ -10,7 +10,7 @@ public class TimeLeft : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioSource audio = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        AudioSource audio = GameObject.Find("GlobalObject").GetComponent<AudioSource>();
         secondsLeft = (long)audio.clip.length;
         timeText = GetComponent<Text>();
         long minutes = secondsLeft / 60;

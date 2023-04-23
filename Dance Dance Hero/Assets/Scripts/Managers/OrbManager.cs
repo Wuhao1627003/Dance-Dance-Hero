@@ -9,6 +9,7 @@ public class OrbManager : MonoBehaviour
     public int scoreForOffBeatHit = 1;
     public List<Orb> orbs = new List<Orb>();
     public Material orbCol;
+    public AudioClip spawnAudio;
     public int stage = 0;
 
     void Start()
@@ -38,18 +39,24 @@ public class OrbManager : MonoBehaviour
             if (rand < 0.3)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
+                AudioSource audioSource = new AudioSource();
+                audioSource.PlayOneShot(spawnAudio);
             }
         } else if (stage == 1)
         {
             if (rand < 0.35)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
+                AudioSource audioSource = new AudioSource();
+                audioSource.PlayOneShot(spawnAudio);
             }
         } else
         {
             if (rand < 0.4)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
+                AudioSource audioSource = new AudioSource();
+                audioSource.PlayOneShot(spawnAudio);
             }
         }
     }
@@ -77,6 +84,7 @@ public class OrbManager : MonoBehaviour
     public void Pulse()
     {
         orbCol.SetColor("_Color", Color.red);
+        orbCol.SetColor("_EmissionColor", new Color(0.368f, 0.075f, 0.087f, 1.0f));
 
         Invoke(nameof(ColorReturn), 0.2f);
     }
@@ -84,6 +92,7 @@ public class OrbManager : MonoBehaviour
     private void ColorReturn()
     {
         orbCol.SetColor("_Color", Color.magenta);
+        orbCol.SetColor("_EmissionColor", new Color(0.086f, 0.075f, 0.368f, 1.0f));
     }
 
 }

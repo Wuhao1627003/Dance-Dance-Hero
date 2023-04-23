@@ -13,10 +13,13 @@ public abstract class Item : MonoBehaviour
     {
         float radius = GameObject.Find("GlobalObject").GetComponent<OrbManager>().radius;
         Vector2 randomPointOnCircle = Random.insideUnitCircle * radius * 1.2f;
-        transform.position = new(randomPointOnCircle.x, GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition.y + 1.5f, randomPointOnCircle.y);
+        Vector3 camPos = GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition;
+        transform.position = new(randomPointOnCircle.x, camPos.y + 1.5f, randomPointOnCircle.y);
         if (spawnAudio != null)
         {
-            AudioSource.PlayClipAtPoint(spawnAudio, transform.position);
+            //AudioSource audioSource = new AudioSource();
+            //audioSource.PlayOneShot(spawnAudio); //, (transform.position - Camera.main.transform.position).normalized / 100.0f + Camera.main.transform.position);
+            //Destroy(audioSource, 5.0f);
         }
         if (randomizeDirection)
         {
@@ -47,8 +50,8 @@ public abstract class Item : MonoBehaviour
                 if (capabilities.supportsImpulse)
                 {
                     uint channel = 0;
-                    float amplitude = 0.5f;
-                    float duration = 1.0f;
+                    float amplitude = 0.7f;
+                    float duration = 0.2f;
                     device.SendHapticImpulse(channel, amplitude, duration);
                 }
             }

@@ -58,7 +58,7 @@ public class ItemManager : MonoBehaviour
 
     public void HandleGrabSun()
     {
-        cg.colorFilter.value = Color.blue;
+        cg.colorFilter.value = Color.magenta;
         punishOffBeat = false;
         punishOnBeat = false;
         GameObject.Find("Score").GetComponent<Score>().IncreaseScore(1);

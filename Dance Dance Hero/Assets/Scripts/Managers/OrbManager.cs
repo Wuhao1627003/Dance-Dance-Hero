@@ -83,8 +83,7 @@ public class OrbManager : MonoBehaviour
 
     private void ColorReturn()
     {
-        Color randomColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        orbCol.SetColor("_Color", randomColor);
+        orbCol.SetColor("_Color", Color.magenta);
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.XR;
 
 public abstract class Item : MonoBehaviour
 {
@@ -39,6 +40,18 @@ public abstract class Item : MonoBehaviour
     {
         if (other.CompareTag("GameController"))
         {
+            InputDevice device = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+            HapticCapabilities capabilities;
+            if (device.TryGetHapticCapabilities(out capabilities))
+            {
+                if (capabilities.supportsImpulse)
+                {
+                    uint channel = 0;
+                    float amplitude = 0.5f;
+                    float duration = 1.0f;
+                    device.SendHapticImpulse(channel, amplitude, duration);
+                }
+            }
             HandleGrab();
             Destroy(gameObject);
         }

@@ -17,7 +17,7 @@ public abstract class Item : MonoBehaviour
         transform.position = new(randomPointOnCircle.x, camPos.y + 1.5f, randomPointOnCircle.y);
         if (spawnAudio != null)
         {
-            AudioSource.PlayClipAtPoint(spawnAudio, (transform.position - camPos).normalized / 10.0f + camPos);
+            AudioSource.PlayClipAtPoint(spawnAudio, (transform.position - camPos) + camPos);
         }
         if (randomizeDirection)
         {

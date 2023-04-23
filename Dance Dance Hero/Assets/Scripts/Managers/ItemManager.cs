@@ -30,7 +30,7 @@ public class ItemManager : MonoBehaviour
         spawnAudio.GetData(data, 0);
         for (int i = 0; i < data.Length; i++)
         {
-            data[i] *= 30;
+            data[i] *= 5;
         }
         spawnAudio.SetData(data, 0);
         sun.GetComponent<Item>().spawnAudio = spawnAudio;

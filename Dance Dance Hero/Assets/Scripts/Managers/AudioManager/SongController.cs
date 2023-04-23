@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
@@ -21,15 +19,16 @@ public class SongController : MonoBehaviour {
 
     public int maxBeatsPerSecond = 2;
     private GameObject orb;
-    private long startTime;
-    private long lastTime;
+    private float lastTime;
+    private float lastPreTime;
+    private float lastUpdateTime;
     private int beatsThisSecond = 0;
+    private int beatsPreThisSecond = 0;
     public bool onBeat { get; private set; }
 
     void Start() {
 		audioSource = GameObject.Find("GlobalObject").GetComponent<AudioSource>();
-        startTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerMillisecond;
-        lastTime = startTime;
+		
         onBeat = false;
         orb = GameObject.Find("Orb");
 
@@ -43,25 +42,21 @@ public class SongController : MonoBehaviour {
 			numChannels = audioSource.clip.channels;
 			numTotalSamples = audioSource.clip.samples;
 			clipLength = audioSource.clip.length;
+            lastTime = 0;
 
-			// We are not evaluating the audio as it is being played by Unity, so we need the clip's sampling rate
-			this.sampleRate = audioSource.clip.frequency;
+            // We are not evaluating the audio as it is being played by Unity, so we need the clip's sampling rate
+            this.sampleRate = audioSource.clip.frequency;
 
 			audioSource.clip.GetData(multiChannelSamples, 0);
-			Debug.Log ("GetData done");
-
-			Thread bgThread = new Thread (this.getFullSpectrumThreaded);
-
-			Debug.Log ("Starting Background Thread");
-			bgThread.Start ();
+			getFullSpectrumThreaded();
+			audioSource.Play();
 		}
 	}
 
-    private long getDuration()
+    private float getDuration(float currentTime)
     {
-        long currentTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerMillisecond;
-        long duration = currentTime - startTime;
-        if (currentTime - lastTime < 1000)
+        float duration = clipLength - currentTime;
+        if (currentTime - lastTime < 1.0f)
         {
             beatsThisSecond++;
             if (beatsThisSecond >= maxBeatsPerSecond)
@@ -77,27 +72,52 @@ public class SongController : MonoBehaviour {
         return duration;
     }
 
+    private float getPreDuration(float currentTime)
+    {
+        float duration = clipLength - currentTime;
+        if (currentTime - lastPreTime < 1.0f)
+        {
+            beatsPreThisSecond++;
+            if (beatsPreThisSecond >= maxBeatsPerSecond)
+            {
+                return -1;
+            }
+        }
+        else
+        {
+            lastPreTime = currentTime;
+            beatsPreThisSecond = 0;
+        }
+        return duration;
+    }
+
     void Update() {
 		// Preprocessed
-		if (preProcessSamples) {
-			int indexToPlot = getIndexFromTime (audioSource.time) / 1024;
-			if (indexToPlot < preProcessedSpectralFluxAnalyzer.spectralFluxSamples.Count && preProcessedSpectralFluxAnalyzer.spectralFluxSamples[indexToPlot].isPeak)
+		if (preProcessSamples && audioSource.time != lastUpdateTime) {
+            lastUpdateTime = audioSource.time;
+            OrbManager orbManager = GameObject.Find("GlobalObject").GetComponent<OrbManager>();
+            ItemManager itemManager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
+            int startBeat = getIndexFromTime(audioSource.time + .5f) / 1024;
+			if (startBeat >= 0 && startBeat < preProcessedSpectralFluxAnalyzer.spectralFluxSamples.Count && preProcessedSpectralFluxAnalyzer.spectralFluxSamples[startBeat].isPeak)
 			{
-                long duration = getDuration();
-                if (duration != -1)
+                float duration = getPreDuration(audioSource.time + 0.5f);
+				if (duration >= 0.0f)
+				{
+					onBeat = true;
+					orbManager.onBeatUpdate();
+					itemManager.onBeatUpdate();
+					Invoke(nameof(RecoverOnBeat), 1.0f);
+				}
+			}
+
+            int indexToPlot = getIndexFromTime(audioSource.time) / 1024;
+            if (indexToPlot >= 0 && indexToPlot < preProcessedSpectralFluxAnalyzer.spectralFluxSamples.Count && preProcessedSpectralFluxAnalyzer.spectralFluxSamples[indexToPlot].isPeak)
+			{
+                float duration = getDuration(audioSource.time);
+                if (duration >= 0.0f)
                 {
-                    Debug.Log("Duration: " + duration.ToString() + " Beats this second: " + beatsThisSecond.ToString());
-
-                    onBeat = true;
-                    Invoke(nameof(RecoverOnBeat), 0.2f);
-
-                    OrbManager orbManager = GameObject.Find("GlobalObject").GetComponent<OrbManager>();
                     orbManager.SpawnOrb();
-                    orbManager.onBeatUpdate();
-
-                    ItemManager itemManager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
                     itemManager.SpawnSomething();
-                    itemManager.onBeatUpdate();
 
                     if (duration > 25)
                     {

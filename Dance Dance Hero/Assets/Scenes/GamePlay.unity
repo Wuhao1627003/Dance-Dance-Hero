@@ -558,6 +558,7 @@ MonoBehaviour:
   scoreForOffBeatHit: 1
   orbs: []
   orbCol: {fileID: 2100000, guid: 5e23e04118a96e34ca409b2dcf78397c, type: 2}
+  spawnAudio: {fileID: 8300000, guid: 3d7c6d167ca405c4ca05c7af3ffd8fd4, type: 3}
   stage: 0
 --- !u!114 &676323001
 MonoBehaviour:
@@ -576,7 +577,7 @@ MonoBehaviour:
     type: 3}
   recoverTime: 3
   items: []
-  postfx: {fileID: 1599579968}
+  postfx: {fileID: 1599579969}
 --- !u!82 &676323002
 AudioSource:
   m_ObjectHideFlags: 0

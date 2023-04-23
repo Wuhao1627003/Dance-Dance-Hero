@@ -20,44 +20,40 @@ public class OrbManager : MonoBehaviour
         // plane spawns about 2 in right and left direction and about 1 in front and back
         // spawn earth at feet at origin with radius between 0.5-0.75
 
-        // Zone 1: until 3min 40 seconds
-        // Zone 2: until 3 min 1 second
-        // Zone 3: until 2 min 43
-        // Zone 4: until 2 min 25
-        // Zone 5: until 2 min 6
-        // Zone 6: until 1 min 46
-        // Zone 7: until 1 min 10
-        // Zone 8: until 50s
-        // 5 seconds of silence at beginning
+        // Zone 1: 247 - 220 0
+        // Zone 2: 220 - 182 1
+        // Zone 3: 182 - 163 2
+        // Zone 5: 163 - 127 1
+        // Zone 6: 127 - 107 2
+        // Zone 7: 107 - 90 0
+        // Zone 8: 90 - 52 1
+        // Zone 9: 52 - 15 2
+        // Zone 10 : 15 - 0 0
     }
 
     public void SpawnOrb()
     {
         float rand = Random.value;
-        if (stage < 0)
+        if (stage == 0)
         {
-            if (rand < 0.3)
+            if (rand < 0.5)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
-                AudioSource audioSource = new AudioSource();
-                audioSource.PlayOneShot(spawnAudio);
+                //AudioSource audioSource = new AudioSource();
+                //audioSource.PlayOneShot(spawnAudio);
             }
         } else if (stage == 1)
         {
-            if (rand < 0.35)
+            if (rand < 0.9)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
-                AudioSource audioSource = new AudioSource();
-                audioSource.PlayOneShot(spawnAudio);
+                //AudioSource audioSource = new AudioSource();
+                //audioSource.PlayOneShot(spawnAudio);
             }
+
         } else
         {
-            if (rand < 0.4)
-            {
-                orbs.Add(Instantiate(orb).GetComponent<Orb>());
-                AudioSource audioSource = new AudioSource();
-                audioSource.PlayOneShot(spawnAudio);
-            }
+            orbs.Add(Instantiate(orb).GetComponent<Orb>());
         }
     }
 

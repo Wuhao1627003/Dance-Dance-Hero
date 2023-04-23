@@ -118,13 +118,51 @@ public class SongController : MonoBehaviour {
                 {
                     orbManager.SpawnOrb();
                     itemManager.SpawnSomething();
-
-                    if (duration > 25)
+					// Zone 1: 247 - 220 0
+					// Zone 2: 220 - 182 1
+					// Zone 3: 182 - 163 2
+					// Zone 5: 163 - 127 1
+					// Zone 6: 127 - 107 2
+					// Zone 7: 107 - 90 0
+					// Zone 8: 90 - 52 1
+					// Zone 9: 52 - 15 2
+					// Zone 10 : 15 - 0 0
+					Debug.Log(duration);
+					Debug.Log(orbManager.stage);
+					if (duration < 224)
+					{
+						orbManager.stage = 1;
+					}
+					if (duration < 186)
                     {
-                        orbManager.stage = 1;
-                    }
-                }
-            }
+						orbManager.stage = 2;
+					}
+					if (duration < 167)
+                    {
+						orbManager.stage = 1;
+					}
+					if (duration < 131)
+					{
+						orbManager.stage = 2;
+					}
+					if (duration < 111)
+					{
+						orbManager.stage = 0;
+					}
+					if (duration < 94)
+					{
+						orbManager.stage = 1;
+					}
+					if (duration < 56)
+					{
+						orbManager.stage = 2;
+					}
+					if (duration < 15)
+					{
+						orbManager.stage = 0;
+					}
+				}
+			}
 		}
 	}
 

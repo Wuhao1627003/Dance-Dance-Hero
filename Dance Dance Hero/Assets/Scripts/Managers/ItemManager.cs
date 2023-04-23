@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class ItemManager : MonoBehaviour
 {
@@ -11,11 +12,17 @@ public class ItemManager : MonoBehaviour
     public bool punishOnBeat { get; private set; }
     public List<Item> items = new List<Item>();
 
+    [SerializeField]
+    private PostProcessVolume postfx;
+    private ColorGrading cg;
+
     void Start()
     {
         punishOffBeat = true;
         punishOnBeat = false;
         initialCameraPosition = GameObject.Find("Main Camera").transform.position;
+        postfx = GameObject.Find("PostFX").GetComponent<PostProcessVolume>();
+        postfx.profile.TryGetSettings(out cg);
     }
 
     public void SpawnSomething()
@@ -51,17 +58,21 @@ public class ItemManager : MonoBehaviour
 
     public void HandleGrabSun()
     {
+        cg.colorFilter.value = Color.blue;
         punishOffBeat = false;
         punishOnBeat = false;
         GameObject.Find("Score").GetComponent<Score>().IncreaseScore(1);
         Invoke(nameof(RecoverPunishOffBeat), recoverTime);
+        Invoke(nameof(RecoverScreenColor), recoverTime);
     }
 
     public void HandleGrabKryptonite()
     {
+        cg.colorFilter.value = Color.red;
         punishOffBeat = true;
         punishOnBeat = true;
         Invoke(nameof(RecoverPunishOnBeat), recoverTime);
+        Invoke(nameof(RecoverScreenColor), recoverTime);
     }
 
     private void RecoverPunishOffBeat()
@@ -72,5 +83,10 @@ public class ItemManager : MonoBehaviour
     private void RecoverPunishOnBeat()
     {
         punishOnBeat = false;
+    }
+    
+    private void RecoverScreenColor()
+    {
+        cg.colorFilter.value = Color.white;
     }
 }

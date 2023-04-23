@@ -17,9 +17,7 @@ public abstract class Item : MonoBehaviour
         transform.position = new(randomPointOnCircle.x, camPos.y + 1.5f, randomPointOnCircle.y);
         if (spawnAudio != null)
         {
-            //AudioSource audioSource = new AudioSource();
-            //audioSource.PlayOneShot(spawnAudio); //, (transform.position - Camera.main.transform.position).normalized / 100.0f + Camera.main.transform.position);
-            //Destroy(audioSource, 5.0f);
+            AudioSource.PlayClipAtPoint(spawnAudio, (transform.position - camPos).normalized / 10.0f + camPos);
         }
         if (randomizeDirection)
         {
@@ -30,10 +28,6 @@ public abstract class Item : MonoBehaviour
         velocity *= speed;
     }
 
-    // public virtual void onBeatUpdate()
-    // {
-    //     transform.position += velocity;
-    // }
     public void Update()
     {
         transform.position += velocity * Time.deltaTime;

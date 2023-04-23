@@ -558,6 +558,7 @@ MonoBehaviour:
   scoreForOffBeatHit: 1
   orbs: []
   orbCol: {fileID: 2100000, guid: 5e23e04118a96e34ca409b2dcf78397c, type: 2}
+  spawnAudio: {fileID: 8300000, guid: 3d7c6d167ca405c4ca05c7af3ffd8fd4, type: 3}
   stage: 0
 --- !u!114 &676323001
 MonoBehaviour:
@@ -576,7 +577,8 @@ MonoBehaviour:
     type: 3}
   recoverTime: 3
   items: []
-  postfx: {fileID: 1599579968}
+  spawnAudio: {fileID: 8300000, guid: a32e32f0615f3704ebb912b554c5da35, type: 3}
+  postfx: {fileID: 1599579969}
 --- !u!82 &676323002
 AudioSource:
   m_ObjectHideFlags: 0
@@ -589,7 +591,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ce9f728a1d799784c8bea46534bfefc4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.106
+  m_Volume: 0.249
   m_Pitch: 1
   Loop: 0
   Mute: 0

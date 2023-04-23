@@ -105,7 +105,6 @@ public class SongController : MonoBehaviour {
 				{
 					onBeat = true;
 					orbManager.onBeatUpdate();
-					itemManager.onBeatUpdate();
 					Invoke(nameof(RecoverOnBeat), 1.0f);
 				}
 			}

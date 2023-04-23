@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -11,6 +12,7 @@ public class ItemManager : MonoBehaviour
     public bool punishOffBeat { get; private set; }
     public bool punishOnBeat { get; private set; }
     public List<Item> items = new List<Item>();
+    public AudioClip spawnAudio;
 
     [SerializeField]
     private PostProcessVolume postfx;
@@ -23,6 +25,16 @@ public class ItemManager : MonoBehaviour
         initialCameraPosition = GameObject.Find("Main Camera").transform.position;
         postfx = GameObject.Find("PostFX").GetComponent<PostProcessVolume>();
         postfx.profile.TryGetSettings(out cg);
+
+        float[] data = new float[spawnAudio.samples * spawnAudio.channels];
+        spawnAudio.GetData(data, 0);
+        for (int i = 0; i < data.Length; i++)
+        {
+            data[i] *= 30;
+        }
+        spawnAudio.SetData(data, 0);
+        sun.GetComponent<Item>().spawnAudio = spawnAudio;
+        kryptonite.GetComponent<Item>().spawnAudio = spawnAudio;
     }
 
     public void SpawnSomething()
@@ -36,14 +48,6 @@ public class ItemManager : MonoBehaviour
         {
             SpawnKryptonite();
         }
-    }
-
-    public void onBeatUpdate()
-    {
-        // foreach (Item item in items)
-        // {
-        //     item.onBeatUpdate();
-        // }
     }
 
     void SpawnSun()

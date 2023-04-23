@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OrbManager : MonoBehaviour
@@ -29,6 +30,15 @@ public class OrbManager : MonoBehaviour
         // Zone 7: until 1 min 10
         // Zone 8: until 50s
         // 5 seconds of silence at beginning
+
+        float[] data = new float[spawnAudio.samples * spawnAudio.channels];
+        spawnAudio.GetData(data, 0);
+        for (int i = 0; i < data.Length; i++)
+        {
+            data[i] *= 30;
+        }
+        spawnAudio.SetData(data, 0);
+        orb.GetComponent<Item>().spawnAudio = spawnAudio;
     }
 
     public void SpawnOrb()
@@ -39,24 +49,18 @@ public class OrbManager : MonoBehaviour
             if (rand < 0.3)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
-                AudioSource audioSource = new AudioSource();
-                audioSource.PlayOneShot(spawnAudio);
             }
         } else if (stage == 1)
         {
             if (rand < 0.35)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
-                AudioSource audioSource = new AudioSource();
-                audioSource.PlayOneShot(spawnAudio);
             }
         } else
         {
             if (rand < 0.4)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
-                AudioSource audioSource = new AudioSource();
-                audioSource.PlayOneShot(spawnAudio);
             }
         }
     }

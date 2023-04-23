@@ -1,0 +1,263 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Glowy
+  m_Shader: {fileID: 4800000, guid: 960aca9aa5d48ad4b8b522dbbab26d8a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _ALPHA_OFF
+  - _EMISSION
+  - _SGT_ALIGN_VIEW
+  - _SGT_DETAIL_OFF
+  - _WAVES_ADDITIVE
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BakedDetailMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BakedDetailMap_Ext_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BakedDetailMap_Ext_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 2800000, guid: 83d8605e0a6bbb34b84c9fc2f50428ed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 83d8605e0a6bbb34b84c9fc2f50428ed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: dbd9de8d81aaa9548a0700e01ce931f9, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_DepthTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_DetailTex:
+        m_Texture: {fileID: 2800000, guid: b20403387ea956e4a97b7b93e6df71e0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_DistortTex:
+        m_Texture: {fileID: 2800000, guid: b20403387ea956e4a97b7b93e6df71e0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_FarTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_LightingTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_NearTex:
+        m_Texture: {fileID: 2800000, guid: aa62984c244417943a42e326d40a286e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_NoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_ScatteringTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SGT_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShoreMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WavesTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 0
+    - _BakedDetailFadeRange: 1000
+    - _BakedDetailFadeRange_Ext_1: 1000
+    - _BakedDetailFadeRange_Ext_2: 1000
+    - _BakedDetailScale: 1
+    - _BakedDetailScale_Ext_1: 1
+    - _BakedDetailScale_Ext_2: 1
+    - _BlendOp: 0
+    - _BumpScale: 1
+    - _CW_DisableFog: 0
+    - _CameraFadingEnabled: 0
+    - _CameraFarFadeDistance: 2
+    - _CameraNearFadeDistance: 1
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DeepPower: 2
+    - _DeepRange: 10000
+    - _DetailNormalMapScale: 1
+    - _DistortionBlend: 0.5
+    - _DistortionEnabled: 0
+    - _DistortionStrength: 1
+    - _DistortionStrengthScaled: 0
+    - _DstBlend: 0
+    - _Emission: 0
+    - _EmissionEnabled: 0
+    - _FlatShadingBlend: 0.9
+    - _FlipbookMode: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _HasBakedDetail: 0
+    - _HasBakedDetail_Ext_1: 0
+    - _HasBakedDetail_Ext_2: 0
+    - _HasFaceted: 0
+    - _HasRefraction: 0
+    - _HasWaves: 0
+    - _LightingEnabled: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _OpacityDepthScale: 0.1
+    - _OpacityFresnel: 0.1
+    - _OpacityPower: 2
+    - _OpacityRange: 1000
+    - _Parallax: 0.02
+    - _RefractionStrength: 1
+    - _Rim: 1
+    - _SGT_Age: 0
+    - _SGT_Align: 0
+    - _SGT_Brightness: 1
+    - _SGT_ClipNear: 0
+    - _SGT_ClipPower: 1
+    - _SGT_ColorInfluence: 10
+    - _SGT_ColorShift: 0
+    - _SGT_Detail: 0
+    - _SGT_DetailStrength: 5
+    - _SGT_DetailTiling: 1
+    - _SGT_DetailTwist: 0
+    - _SGT_DetailTwistBias: 0
+    - _SGT_Distort: 0
+    - _SGT_DistortStrength: 0.1
+    - _SGT_DstBlend: 1
+    - _SGT_FadeEdge: 0
+    - _SGT_FadePower: 1
+    - _SGT_FarFade: 0
+    - _SGT_FarRadius: 100
+    - _SGT_FarRangeRecip: 1
+    - _SGT_Flow: 0
+    - _SGT_FlowNoiseTiling: 1
+    - _SGT_FlowSpeed: 1
+    - _SGT_FlowStrength: 1
+    - _SGT_Lighting: 0
+    - _SGT_Near: 0
+    - _SGT_NearDistance: 10000
+    - _SGT_NearFade: 0
+    - _SGT_NearRangeRecip: 1
+    - _SGT_PowerRgb: 0
+    - _SGT_Pulse: 0
+    - _SGT_PulseMax: 1
+    - _SGT_PulseMin: 0.5
+    - _SGT_PulseSpeed: 100
+    - _SGT_Scattering: 0
+    - _SGT_ScatteringStrength: 1
+    - _SGT_TextureJitter: 0.1
+    - _SGT_TextureScale: 1
+    - _SGT_Tiling: 1
+    - _SGT_ZTest: 4
+    - _Scale: 1
+    - _Shift: 1
+    - _ShoreFadeRange: 10
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _SoftParticlesEnabled: 0
+    - _SoftParticlesFarFadeDistance: 1
+    - _SoftParticlesNearFadeDistance: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Tiling: 1
+    - _UVSec: 0
+    - _Waves: 0
+    - _WavesInterval: 10
+    - _WavesNoiseTiling: 100
+    - _WavesRange: 5
+    - _WavesSpeed: 1
+    - _ZWrite: 1
+    m_Colors:
+    - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 1, g: 0.5, b: 0.5, a: 1}
+    - _Color2: {r: 0.5, g: 0.5, b: 1, a: 1}
+    - _DeepColor: {r: 0, g: 0, b: 1, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _SGT_AmbientColor: {r: 0, g: 0, b: 0, a: 0}
+    - _SGT_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _SGT_DetailScale: {r: 3, g: 50, b: 0, a: 0}
+    - _SGT_DetailSpeed: {r: 1, g: 1, b: 0, a: 0}
+    - _SGT_DetailTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _SGT_DistortScale: {r: 0.1, g: 5, b: 0, a: 0}
+    - _SGT_DistortSpeed: {r: 1, g: 0.1, b: 0, a: 0}
+    - _SGT_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _SGT_RimMax: {r: 5, g: 5, b: 5, a: 1}
+    - _SGT_RimMin: {r: 10, g: 10, b: 10, a: 1}
+    - _SGT_Scale: {r: 0, g: 0, b: 0, a: 0}
+    - _SGT_ScatteringStrengths: {r: 1, g: 0, b: 0, a: 0}
+    - _SGT_ScatteringTerms: {r: 10, g: 1, b: 1, a: 1}
+    - _SGT_TextureBlend: {r: 0.1, g: 6, b: 0, a: 0}
+    - _SGT_Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _WavesColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

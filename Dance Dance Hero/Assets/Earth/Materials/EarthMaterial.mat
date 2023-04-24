@@ -132,7 +132,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RimIntensity: 10
-    - _RimPower: 12
+    - _RimPower: 5.2
     - _Shininess: 0.03
     - _Smoothness: 0.4
     - _SpecularIntensity: 2

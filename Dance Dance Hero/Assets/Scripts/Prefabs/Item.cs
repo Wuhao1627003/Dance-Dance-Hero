@@ -3,22 +3,17 @@ using UnityEngine.XR;
 
 public abstract class Item : MonoBehaviour
 {
-
     public bool randomizeDirection = false;
     public float speed = 0.2f;
     public Vector3 velocity = Vector3.down;
-    public AudioClip spawnAudio;
 
-    void Start()
+    void Awake()
     {
         float radius = GameObject.Find("GlobalObject").GetComponent<OrbManager>().radius;
         Vector2 randomPointOnCircle = Random.insideUnitCircle * radius * 1.2f;
         Vector3 camPos = GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition;
         transform.position = new(randomPointOnCircle.x, camPos.y + 1.5f, randomPointOnCircle.y);
-        if (spawnAudio != null)
-        {
-            AudioSource.PlayClipAtPoint(spawnAudio, (transform.position - camPos) + camPos);
-        }
+
         if (randomizeDirection)
         {
             Vector3 randomPointOnEarth = Random.insideUnitSphere * radius;
@@ -28,9 +23,9 @@ public abstract class Item : MonoBehaviour
         velocity *= speed;
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
-        transform.position += velocity * Time.deltaTime;
+        transform.position += velocity * Time.fixedDeltaTime;
     }
 
     void OnTriggerEnter(Collider other)

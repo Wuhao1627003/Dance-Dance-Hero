@@ -13,34 +13,6 @@ public class OrbManager : MonoBehaviour
     public AudioClip spawnAudio;
     public int stage = 0;
 
-    void Start()
-    {
-        //UnityEngine.XR.XRInputSubsystem
-
-        // heights vary from abt 1.3-1.8 spawn orbs around 2
-        // plane spawns about 2 in right and left direction and about 1 in front and back
-        // spawn earth at feet at origin with radius between 0.5-0.75
-
-        // Zone 1: 247 - 220 0
-        // Zone 2: 220 - 182 1
-        // Zone 3: 182 - 163 2
-        // Zone 5: 163 - 127 1
-        // Zone 6: 127 - 107 2
-        // Zone 7: 107 - 90 0
-        // Zone 8: 90 - 52 1
-        // Zone 9: 52 - 15 2
-        // Zone 10 : 15 - 0 0
-
-        float[] data = new float[spawnAudio.samples * spawnAudio.channels];
-        spawnAudio.GetData(data, 0);
-        for (int i = 0; i < data.Length; i++)
-        {
-            data[i] *= 5;
-        }
-        spawnAudio.SetData(data, 0);
-        orb.GetComponent<Item>().spawnAudio = spawnAudio;
-    }
-
     public void SpawnOrb()
     {
         float rand = Random.value;
@@ -50,20 +22,26 @@ public class OrbManager : MonoBehaviour
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
             }
-        } else if (stage == 1)
+        }
+        else if (stage == 1)
         {
             if (rand < 0.9)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
             }
 
-        } else
+        }
+        else
         {
-            if (rand < 0.4)
+            orbs.Add(Instantiate(orb).GetComponent<Orb>());
+
+            if (rand < 0.1)
             {
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
             }
         }
+
+        GameObject.Find("ExternalAudio").GetComponent<AudioSource>().PlayOneShot(spawnAudio);
     }
 
     public void onBeatUpdate()

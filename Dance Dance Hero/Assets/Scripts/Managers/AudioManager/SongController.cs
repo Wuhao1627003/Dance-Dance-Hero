@@ -1,29 +1,35 @@
 ﻿using System;
-using System.Threading;
 using UnityEngine;
 
-using System.Numerics;
-using DSPLib;
-
+using System.Text;
+using System.Linq;
+using System.Collections.Generic;
 
 public class SongController : MonoBehaviour {
-	int numChannels;
-	int numTotalSamples;
-	int sampleRate;
-	float clipLength;
-	float[] multiChannelSamples;
-	SpectralFluxAnalyzer preProcessedSpectralFluxAnalyzer;
+    #region CONST
 
-	AudioSource audioSource;
-	public bool preProcessSamples = false;
+    // BPM search range
+    private const int MIN_BPM = 60;
+    private const int MAX_BPM = 400;
+    // Base frequency (44.1kbps)
+    private const int BASE_FREQUENCY = 44100;
+    // Base channels (2ch)
+    private const int BASE_CHANNELS = 2;
+    // Base split size of sample data (case of 44.1kbps & 2ch)
+    private const int BASE_SPLIT_SAMPLE_SIZE = 2205;
 
-    public int maxBeatsPerSecond = 2;
+    #endregion
+
+    AudioSource audioSource;
+
     private GameObject orb;
-    private float lastTime;
-    private float lastPreTime;
-    private float lastUpdateTime;
-    private int beatsThisSecond = 0;
-    private int beatsPreThisSecond = 0;
+	private float secondsPerBeat;
+    private float clipLength;
+    private float startEarlyTime = 1.0f;
+    private float currentTime = 0.7f;
+    private OrbManager orbManager;
+    private ItemManager itemManager;
+
     public bool onBeat { get; private set; }
 
     void Start() {
@@ -31,138 +37,75 @@ public class SongController : MonoBehaviour {
 		
         onBeat = false;
         orb = GameObject.Find("Orb");
+        clipLength = audioSource.clip.length;
 
-		// Preprocess entire audio file upfront
-		if (preProcessSamples) {
-			preProcessedSpectralFluxAnalyzer = new SpectralFluxAnalyzer ();
+        orbManager = GameObject.Find("GlobalObject").GetComponent<OrbManager>();
+        itemManager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
 
-			// Need all audio samples.  If in stereo, samples will return with left and right channels interweaved
-			// [L,R,L,R,L,R]
-			multiChannelSamples = new float[audioSource.clip.samples * audioSource.clip.channels];
-			numChannels = audioSource.clip.channels;
-			numTotalSamples = audioSource.clip.samples;
-			clipLength = audioSource.clip.length;
-            lastTime = 0;
-
-            // We are not evaluating the audio as it is being played by Unity, so we need the clip's sampling rate
-            this.sampleRate = audioSource.clip.frequency;
-
-			audioSource.clip.GetData(multiChannelSamples, 0);
-			getFullSpectrumThreaded();
-			audioSource.Play();
-		}
-	}
-
-    private float getDuration(float currentTime)
-    {
-        float duration = clipLength - currentTime;
-        if (currentTime - lastTime < 1.0f)
-        {
-            beatsThisSecond++;
-            if (beatsThisSecond >= maxBeatsPerSecond)
-            {
-                return -1;
-            }
-        }
-        else
-        {
-            lastTime = currentTime;
-            beatsThisSecond = 0;
-        }
-        return duration;
+        // Preprocess entire audio file upfront
+        int avgBpm = AnalyzeBpm(audioSource.clip) / 2;
+        secondsPerBeat = 60.0f / (float)avgBpm;
+        audioSource.Play();
     }
 
-    private float getPreDuration(float currentTime)
-    {
-        float duration = clipLength - currentTime;
-        if (currentTime - lastPreTime < 1.0f)
+    void FixedUpdate() {
+        currentTime += Time.fixedDeltaTime;
+        if ((currentTime + startEarlyTime) % secondsPerBeat < Time.fixedDeltaTime)
         {
-            beatsPreThisSecond++;
-            if (beatsPreThisSecond >= maxBeatsPerSecond)
+            onBeat = true;
+            orbManager.onBeatUpdate();
+            Invoke(nameof(RecoverOnBeat), 2.0f);
+        }
+
+        if ((currentTime) % secondsPerBeat < Time.fixedDeltaTime)
+        {
+            orbManager.SpawnOrb();
+            itemManager.SpawnSomething();
+            // Zone 1: 247 - 220 0
+            // Zone 2: 220 - 182 1
+            // Zone 3: 182 - 163 2
+            // Zone 5: 163 - 127 1
+            // Zone 6: 127 - 107 2
+            // Zone 7: 107 - 90 0
+            // Zone 8: 90 - 52 1
+            // Zone 9: 52 - 15 2
+            // Zone 10 : 15 - 0 0
+            float remainingTime = clipLength - audioSource.time;
+            Debug.Log(remainingTime);
+            Debug.Log(orbManager.stage);
+            if (remainingTime < 224)
             {
-                return -1;
+                orbManager.stage = 1;
+            }
+            if (remainingTime < 186)
+            {
+                orbManager.stage = 2;
+            }
+            if (remainingTime < 167)
+            {
+                orbManager.stage = 1;
+            }
+            if (remainingTime < 131)
+            {
+                orbManager.stage = 2;
+            }
+            if (remainingTime < 111)
+            {
+                orbManager.stage = 0;
+            }
+            if (remainingTime < 94)
+            {
+                orbManager.stage = 1;
+            }
+            if (remainingTime < 56)
+            {
+                orbManager.stage = 2;
+            }
+            if (remainingTime < 15)
+            {
+                orbManager.stage = 0;
             }
         }
-        else
-        {
-            lastPreTime = currentTime;
-            beatsPreThisSecond = 0;
-        }
-        return duration;
-    }
-
-    void Update() {
-		// Preprocessed
-		if (preProcessSamples && audioSource.time != lastUpdateTime) {
-            lastUpdateTime = audioSource.time;
-            OrbManager orbManager = GameObject.Find("GlobalObject").GetComponent<OrbManager>();
-            ItemManager itemManager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
-            int startBeat = getIndexFromTime(audioSource.time + .5f) / 1024;
-			if (startBeat >= 0 && startBeat < preProcessedSpectralFluxAnalyzer.spectralFluxSamples.Count && preProcessedSpectralFluxAnalyzer.spectralFluxSamples[startBeat].isPeak)
-			{
-                float duration = getPreDuration(audioSource.time + 0.5f);
-				if (duration >= 0.0f)
-				{
-					onBeat = true;
-					orbManager.onBeatUpdate();
-					Invoke(nameof(RecoverOnBeat), 1.0f);
-				}
-			}
-
-            int indexToPlot = getIndexFromTime(audioSource.time) / 1024;
-            if (indexToPlot >= 0 && indexToPlot < preProcessedSpectralFluxAnalyzer.spectralFluxSamples.Count && preProcessedSpectralFluxAnalyzer.spectralFluxSamples[indexToPlot].isPeak)
-			{
-                float duration = getDuration(audioSource.time);
-                if (duration >= 0.0f)
-                {
-                    orbManager.SpawnOrb();
-                    itemManager.SpawnSomething();
-					// Zone 1: 247 - 220 0
-					// Zone 2: 220 - 182 1
-					// Zone 3: 182 - 163 2
-					// Zone 5: 163 - 127 1
-					// Zone 6: 127 - 107 2
-					// Zone 7: 107 - 90 0
-					// Zone 8: 90 - 52 1
-					// Zone 9: 52 - 15 2
-					// Zone 10 : 15 - 0 0
-					Debug.Log(duration);
-					Debug.Log(orbManager.stage);
-					if (duration < 224)
-					{
-						orbManager.stage = 1;
-					}
-					if (duration < 186)
-                    {
-						orbManager.stage = 2;
-					}
-					if (duration < 167)
-                    {
-						orbManager.stage = 1;
-					}
-					if (duration < 131)
-					{
-						orbManager.stage = 2;
-					}
-					if (duration < 111)
-					{
-						orbManager.stage = 0;
-					}
-					if (duration < 94)
-					{
-						orbManager.stage = 1;
-					}
-					if (duration < 56)
-					{
-						orbManager.stage = 2;
-					}
-					if (duration < 15)
-					{
-						orbManager.stage = 0;
-					}
-				}
-			}
-		}
 	}
 
     void RecoverOnBeat()
@@ -170,66 +113,148 @@ public class SongController : MonoBehaviour {
         onBeat = false;
     }
 
-    public int getIndexFromTime(float curTime) {
-		float lengthPerSample = this.clipLength / (float)this.numTotalSamples;
+    public struct BpmMatchData
+    {
+        public int bpm;
+        public float match;
+    }
 
-		return Mathf.FloorToInt (curTime / lengthPerSample);
-	}
+    private static BpmMatchData[] bpmMatchDatas = new BpmMatchData[MAX_BPM - MIN_BPM + 1];
 
-	public float getTimeFromIndex(int index) {
-		return ((1f / (float)this.sampleRate) * index);
-	}
+    /// <summary>
+    /// Analyze BPM from an audio clip
+    /// </summary>
+    /// <param name="clip">target audio clip</param>
+    /// <returns>bpm</returns>
+    public static int AnalyzeBpm(AudioClip clip)
+    {
+        for (int i = 0; i < bpmMatchDatas.Length; i++)
+        {
+            bpmMatchDatas[i].match = 0f;
+        }
+        if (clip == null)
+        {
+            return -1;
+        }
+        Debug.Log("AnalyzeBpm audioClipName : " + clip.name);
 
-	public void getFullSpectrumThreaded() {
-		try {
-			// We only need to retain the samples for combined channels over the time domain
-			float[] preProcessedSamples = new float[this.numTotalSamples];
+        int frequency = clip.frequency;
+        Debug.Log("Frequency : " + frequency);
 
-			int numProcessed = 0;
-			float combinedChannelAverage = 0f;
-			for (int i = 0; i < multiChannelSamples.Length; i++) {
-				combinedChannelAverage += multiChannelSamples [i];
+        int channels = clip.channels;
+        Debug.Log("Channels : " + channels);
 
-				// Each time we have processed all channels samples for a point in time, we will store the average of the channels combined
-				if ((i + 1) % this.numChannels == 0) {
-					preProcessedSamples[numProcessed] = combinedChannelAverage / this.numChannels;
-					numProcessed++;
-					combinedChannelAverage = 0f;
-				}
-			}
+        int splitFrameSize = Mathf.FloorToInt(((float)frequency / (float)BASE_FREQUENCY) * ((float)channels / (float)BASE_CHANNELS) * (float)BASE_SPLIT_SAMPLE_SIZE);
 
-			// Once we have our audio sample data prepared, we can execute an FFT to return the spectrum data over the time domain
-			int spectrumSampleSize = 1024;
-			int iterations = preProcessedSamples.Length / spectrumSampleSize;
+        // Get all sample data from audioclip
+        var allSamples = new float[clip.samples * channels];
+        clip.GetData(allSamples, 0);
 
-			FFT fft = new FFT ();
-			fft.Initialize ((UInt32)spectrumSampleSize);
+        // Create volume array from all sample data
+        var volumeArr = CreateVolumeArray(allSamples, frequency, channels, splitFrameSize);
 
-			Debug.Log (string.Format("Processing {0} time domain samples for FFT", iterations));
-			double[] sampleChunk = new double[spectrumSampleSize];
-			for (int i = 0; i < iterations; i++) {
-				// Grab the current 1024 chunk of audio sample data
-				Array.Copy (preProcessedSamples, i * spectrumSampleSize, sampleChunk, 0, spectrumSampleSize);
+        // Search bpm from volume array
+        int bpm = SearchBpm(volumeArr, frequency, splitFrameSize);
+        Debug.Log("Matched BPM : " + bpm);
 
-				// Apply our chosen FFT Window
-				double[] windowCoefs = DSP.Window.Coefficients (DSP.Window.Type.Hanning, (uint)spectrumSampleSize);
-				double[] scaledSpectrumChunk = DSP.Math.Multiply (sampleChunk, windowCoefs);
-				double scaleFactor = DSP.Window.ScaleFactor.Signal (windowCoefs);
+        var strBuilder = new StringBuilder("BPM Match Data List\n");
+        for (int i = 0; i < bpmMatchDatas.Length; i++)
+        {
+            strBuilder.Append("bpm : " + bpmMatchDatas[i].bpm + ", match : " + Mathf.FloorToInt(bpmMatchDatas[i].match * 10000f) + "\n");
+        }
+        Debug.Log(strBuilder.ToString());
 
-				// Perform the FFT and convert output (complex numbers) to Magnitude
-				Complex[] fftSpectrum = fft.Execute (scaledSpectrumChunk);
-				double[] scaledFFTSpectrum = DSPLib.DSP.ConvertComplex.ToMagnitude (fftSpectrum);
-				scaledFFTSpectrum = DSP.Math.Multiply (scaledFFTSpectrum, scaleFactor);
+        return bpm;
+    }
 
-				// These 1024 magnitude values correspond (roughly) to a single point in the audio timeline
-				float curSongTime = getTimeFromIndex(i) * spectrumSampleSize;
+    /// <summary>
+    /// Create volume array from all sample data
+    /// </summary>
+    private static float[] CreateVolumeArray(float[] allSamples, int frequency, int channels, int splitFrameSize)
+    {
+        // Initialize volume array
+        var volumeArr = new float[Mathf.CeilToInt((float)allSamples.Length / (float)splitFrameSize)];
+        int powerIndex = 0;
 
-				// Send our magnitude data off to our Spectral Flux Analyzer to be analyzed for peaks
-				preProcessedSpectralFluxAnalyzer.analyzeSpectrum (Array.ConvertAll (scaledFFTSpectrum, x => (float)x), curSongTime);
-			}
-		} catch (Exception e) {
-			// Catch exceptions here since the background thread won't always surface the exception to the main thread
-			Debug.Log (e.ToString ());
-		}
-	}
+        // Sample data analysis start
+        for (int sampleIndex = 0; sampleIndex < allSamples.Length; sampleIndex += splitFrameSize)
+        {
+            float sum = 0f;
+            for (int frameIndex = sampleIndex; frameIndex < sampleIndex + splitFrameSize; frameIndex++)
+            {
+                if (allSamples.Length <= frameIndex)
+                {
+                    break;
+                }
+                // Use the absolute value, because left and right value is -1 to 1
+                float absValue = Mathf.Abs(allSamples[frameIndex]);
+                if (absValue > 1f)
+                {
+                    continue;
+                }
+
+                // Calculate the amplitude square sum
+                sum += (absValue * absValue);
+            }
+
+            // Set volume value
+            volumeArr[powerIndex] = Mathf.Sqrt(sum / splitFrameSize);
+            powerIndex++;
+        }
+
+        // Representing a volume value from 0 to 1
+        float maxVolume = volumeArr.Max();
+        for (int i = 0; i < volumeArr.Length; i++)
+        {
+            volumeArr[i] = volumeArr[i] / maxVolume;
+        }
+
+        return volumeArr;
+    }
+
+    /// <summary>
+    /// Search bpm from volume array
+    /// </summary>
+    private static int SearchBpm(float[] volumeArr, int frequency, int splitFrameSize)
+    {
+        // Create volume diff list
+        var diffList = new List<float>();
+        for (int i = 1; i < volumeArr.Length; i++)
+        {
+            diffList.Add(Mathf.Max(volumeArr[i] - volumeArr[i - 1], 0f));
+        }
+
+        // Calculate the degree of coincidence in each BPM
+        int index = 0;
+        float splitFrequency = (float)frequency / (float)splitFrameSize;
+        for (int bpm = MIN_BPM; bpm <= MAX_BPM; bpm++)
+        {
+            float sinMatch = 0f;
+            float cosMatch = 0f;
+            float bps = (float)bpm / 60f;
+
+            if (diffList.Count() > 0)
+            {
+                for (int i = 0; i < diffList.Count; i++)
+                {
+                    sinMatch += (diffList[i] * Mathf.Cos(i * 2f * Mathf.PI * bps / splitFrequency));
+                    cosMatch += (diffList[i] * Mathf.Sin(i * 2f * Mathf.PI * bps / splitFrequency));
+                }
+
+                sinMatch *= (1f / (float)diffList.Count);
+                cosMatch *= (1f / (float)diffList.Count);
+            }
+
+            float match = Mathf.Sqrt((sinMatch * sinMatch) + (cosMatch * cosMatch));
+
+            bpmMatchDatas[index].bpm = bpm;
+            bpmMatchDatas[index].match = match;
+            index++;
+        }
+
+        // Returns a high degree of coincidence BPM
+        int matchIndex = Array.FindIndex(bpmMatchDatas, x => x.match == bpmMatchDatas.Max(y => y.match));
+
+        return bpmMatchDatas[matchIndex].bpm;
+    }
 }

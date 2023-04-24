@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -12,7 +11,6 @@ public class ItemManager : MonoBehaviour
     public bool punishOffBeat { get; private set; }
     public bool punishOnBeat { get; private set; }
     public List<Item> items = new List<Item>();
-    public AudioClip spawnAudio;
 
     [SerializeField]
     private PostProcessVolume postfx;
@@ -25,26 +23,16 @@ public class ItemManager : MonoBehaviour
         initialCameraPosition = GameObject.Find("Main Camera").transform.position;
         postfx = GameObject.Find("PostFX").GetComponent<PostProcessVolume>();
         postfx.profile.TryGetSettings(out cg);
-
-        float[] data = new float[spawnAudio.samples * spawnAudio.channels];
-        spawnAudio.GetData(data, 0);
-        for (int i = 0; i < data.Length; i++)
-        {
-            data[i] *= 5;
-        }
-        spawnAudio.SetData(data, 0);
-        sun.GetComponent<Item>().spawnAudio = spawnAudio;
-        kryptonite.GetComponent<Item>().spawnAudio = spawnAudio;
     }
 
     public void SpawnSomething()
     {
         float rand = Random.value;
-        if (rand < 0.05)
+        if (rand < 0.1)
         {
             SpawnSun();
         }
-        else if (rand > 0.95)
+        else if (rand > 0.9)
         {
             SpawnKryptonite();
         }
@@ -52,12 +40,12 @@ public class ItemManager : MonoBehaviour
 
     void SpawnSun()
     {
-        items.Add(Instantiate(sun).GetComponent<Item>());
+        items.Add(Instantiate(sun).GetComponent<Sun>());
     }
 
     void SpawnKryptonite()
     {
-        items.Add(Instantiate(kryptonite).GetComponent<Item>());
+        items.Add(Instantiate(kryptonite).GetComponent<Kryptonite>());
     }
 
     public void HandleGrabSun()

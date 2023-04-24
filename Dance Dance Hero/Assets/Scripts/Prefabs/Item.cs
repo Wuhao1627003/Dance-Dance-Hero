@@ -37,7 +37,7 @@ public abstract class Item : MonoBehaviour
     {
         if (other.CompareTag("GameController"))
         {
-            InputDevice device = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+            InputDevice device = InputDevices.GetDeviceAtXRNode(other.gameObject.name.Contains("Left") ? XRNode.LeftHand : XRNode.RightHand);
             HapticCapabilities capabilities;
             if (device.TryGetHapticCapabilities(out capabilities))
             {

@@ -127,6 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c809090f33545ac4fb2cddb0b3c7fb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomizeDirection: 1
+  shootAtPlayer: 1
   speed: 0.3
   velocity: {x: 0, y: -1, z: 0}

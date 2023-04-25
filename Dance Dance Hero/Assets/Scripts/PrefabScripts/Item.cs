@@ -3,7 +3,7 @@ using UnityEngine.XR;
 
 public abstract class Item : MonoBehaviour
 {
-    public bool randomizeDirection = false;
+    public bool shootAtPlayer = false;
     public float speed = 0.2f;
     public Vector3 velocity = Vector3.down;
 
@@ -12,12 +12,12 @@ public abstract class Item : MonoBehaviour
         float radius = GameObject.Find("GlobalObject").GetComponent<OrbManager>().radius;
         Vector2 randomPointOnCircle = Random.insideUnitCircle * radius * 1.2f;
         Vector3 camPos = GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition;
-        transform.position = new(randomPointOnCircle.x, camPos.y + 1.5f, randomPointOnCircle.y);
+        transform.position = new(randomPointOnCircle.x, camPos.y + 1.0f, randomPointOnCircle.y);
 
-        if (randomizeDirection)
+        if (shootAtPlayer)
         {
-            Vector3 randomPointOnEarth = Random.insideUnitSphere * radius;
-            velocity = (randomPointOnEarth - transform.position).normalized;
+            Vector3 playerCenter = new Vector3(camPos.x, camPos.y / 2, camPos.z);
+            velocity = (playerCenter - transform.position).normalized;
         }
 
         velocity *= speed;

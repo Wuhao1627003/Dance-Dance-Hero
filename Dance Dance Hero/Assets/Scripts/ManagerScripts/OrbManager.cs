@@ -66,10 +66,25 @@ public class OrbManager : MonoBehaviour
     }
     public void Pulse()
     {
+        ItemManager manager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
+
+        // grabbed Kryptonite
+        if (manager.punishOnBeat)
+        {
+            ColorReturn();
+            return;
+        }
+
         orbCol.SetColor("_Color", Color.red);
         orbCol.SetColor("_EmissionColor", new Color(0.368f, 0.075f, 0.087f, 1.0f));
 
-        Invoke(nameof(ColorReturn), 0.2f);
+        // haven't grabbed Sun
+        if (manager.punishOffBeat)
+        {
+            Invoke(nameof(ColorReturn), 0.2f);
+            return;
+        }
+        return;
     }
 
     private void ColorReturn()

@@ -14,12 +14,10 @@ public class Orb : Item
     public override void HandleGrab()
     {
         GameObject.Find("GlobalObject").GetComponent<OrbManager>().HandlePunch();
-        //Debug.Log("Hit Orb");
     }
 
     public override void HandleEarthCollision()
     {
-        //Debug.Log("Hit Earth!");
     }
 
 }

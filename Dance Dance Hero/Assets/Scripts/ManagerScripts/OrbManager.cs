@@ -6,12 +6,12 @@ public class OrbManager : MonoBehaviour
 {
     public GameObject orb;
     public float radius { get { return GameObject.Find("EarthRendering").GetComponent<SphereCollider>().radius * 0.6f; } }
-    public int scoreForOnBeatHit = 2;
-    public int scoreForOffBeatHit = 1;
+    public int scorePerfect = 10, scoreGood = 5, scorePoor = 1;
     public List<Orb> orbs = new List<Orb>();
     public Material orbCol;
     public AudioClip spawnAudio;
     public int stage = 0;
+    public float scale = 1;
 
     public void SpawnOrb()
     {
@@ -40,8 +40,6 @@ public class OrbManager : MonoBehaviour
                 orbs.Add(Instantiate(orb).GetComponent<Orb>());
             }
         }
-
-        GameObject.Find("ExternalAudio").GetComponent<AudioSource>().PlayOneShot(spawnAudio);
     }
 
     public void onBeatUpdate()
@@ -51,17 +49,32 @@ public class OrbManager : MonoBehaviour
 
     public void HandlePunch()
     {
-        int score;
+        int score = scorePoor;
         ItemManager manager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
-        bool onBeat = GameObject.Find("GlobalObject").GetComponent<SongController>().onBeat;
-        if (onBeat)
+        Performance performance = GameObject.Find("GlobalObject").GetComponent<SongController>().performance;
+
+        if (manager.punishOnBeat)
         {
-            score = manager.punishOnBeat ? scoreForOffBeatHit : scoreForOnBeatHit;
+            performance = Performance.Poor;
         }
-        else
+        if (!manager.punishOffBeat)
         {
-            score = manager.punishOffBeat ? scoreForOffBeatHit : scoreForOnBeatHit;
+            performance = Performance.Perfect;
         }
+
+        switch (performance)
+        {
+            case Performance.Poor:
+                score = scorePoor;
+                break;
+            case Performance.Good:
+                score = scoreGood;
+                break;
+            case Performance.Perfect:
+                score = scorePerfect;
+                break;
+        }
+        Debug.Log(score);
         GameObject.Find("Score").GetComponent<Score>().IncreaseScore(score);
     }
     public void Pulse()

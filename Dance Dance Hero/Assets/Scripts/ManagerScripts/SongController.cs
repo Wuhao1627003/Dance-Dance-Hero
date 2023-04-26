@@ -1,9 +1,15 @@
 ﻿using System;
 using UnityEngine;
-
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
+
+public enum Performance
+{
+    Poor,
+    Good,
+    Perfect
+}
 
 public class SongController : MonoBehaviour {
     #region CONST
@@ -23,19 +29,17 @@ public class SongController : MonoBehaviour {
     AudioSource audioSource;
 
     private GameObject orb;
-	private float secondsPerBeat;
-    private float clipLength;
-    private float startEarlyTime = 1.0f;
+    private float secondsPerBeat, clipLength, timeGood, timePerfect;
     private float currentTime = 0.7f;
     private OrbManager orbManager;
     private ItemManager itemManager;
 
-    public bool onBeat { get; private set; }
+    public Performance performance { get; private set; }
 
     void Start() {
 		audioSource = GameObject.Find("GlobalObject").GetComponent<AudioSource>();
-		
-        onBeat = false;
+
+        performance = Performance.Poor;
         orb = GameObject.Find("Orb");
         clipLength = audioSource.clip.length;
 
@@ -45,74 +49,88 @@ public class SongController : MonoBehaviour {
         // Preprocess entire audio file upfront
         int avgBpm = AnalyzeBpm(audioSource.clip) / 2;
         secondsPerBeat = 60.0f / (float)avgBpm;
+        timeGood = 0.5f * secondsPerBeat;
+        timePerfect = 0.1f * secondsPerBeat;
         audioSource.Play();
+    }
+
+    int stageSJLT(float remainingTime)
+    {
+        // Zone 1: 247 - 220 0
+        // Zone 2: 220 - 182 1
+        // Zone 3: 182 - 163 2
+        // Zone 5: 163 - 127 1
+        // Zone 6: 127 - 107 2
+        // Zone 7: 107 - 90 0
+        // Zone 8: 90 - 52 1
+        // Zone 9: 52 - 15 2
+        // Zone 10 : 15 - 0 0
+        if (remainingTime < 15)
+        {
+            return 0;
+        }
+        if (remainingTime < 56)
+        {
+            return 2;
+        }
+        if (remainingTime < 94)
+        {
+            return 1;
+        }
+        if (remainingTime < 111)
+        {
+            return 0;
+        }
+        if (remainingTime < 131)
+        {
+            return 2;
+        }
+        if (remainingTime < 167)
+        {
+            return 1;
+        }
+        if (remainingTime < 186)
+        {
+            return 2;
+        }
+        if (remainingTime < 224)
+        {
+            return 1;
+        }
+        return 0;
     }
 
     void FixedUpdate() {
         currentTime += Time.fixedDeltaTime;
-        if ((currentTime + startEarlyTime) % secondsPerBeat < Time.fixedDeltaTime)
+        if ((currentTime + timePerfect) % secondsPerBeat < Time.fixedDeltaTime)
         {
-            onBeat = true;
+            performance = Performance.Perfect;
             orbManager.onBeatUpdate();
-            Invoke(nameof(RecoverOnBeat), 2.0f);
+            Invoke(nameof(Good), timePerfect * 2);
+            Invoke(nameof(Poor), timePerfect + timeGood);
         }
 
         if ((currentTime) % secondsPerBeat < Time.fixedDeltaTime)
         {
             orbManager.SpawnOrb();
             itemManager.SpawnSomething();
-            // Zone 1: 247 - 220 0
-            // Zone 2: 220 - 182 1
-            // Zone 3: 182 - 163 2
-            // Zone 5: 163 - 127 1
-            // Zone 6: 127 - 107 2
-            // Zone 7: 107 - 90 0
-            // Zone 8: 90 - 52 1
-            // Zone 9: 52 - 15 2
-            // Zone 10 : 15 - 0 0
+            
             float remainingTime = clipLength - audioSource.time;
-            Debug.Log(remainingTime);
-            Debug.Log(orbManager.stage);
-            if (remainingTime < 224)
-            {
-                orbManager.stage = 1;
-            }
-            if (remainingTime < 186)
-            {
-                orbManager.stage = 2;
-            }
-            if (remainingTime < 167)
-            {
-                orbManager.stage = 1;
-            }
-            if (remainingTime < 131)
-            {
-                orbManager.stage = 2;
-            }
-            if (remainingTime < 111)
-            {
-                orbManager.stage = 0;
-            }
-            if (remainingTime < 94)
-            {
-                orbManager.stage = 1;
-            }
-            if (remainingTime < 56)
-            {
-                orbManager.stage = 2;
-            }
-            if (remainingTime < 15)
-            {
-                orbManager.stage = 0;
-            }
+            orbManager.stage = stageSJLT(remainingTime);
         }
 	}
 
-    void RecoverOnBeat()
+    void Poor()
     {
-        onBeat = false;
+        performance = Performance.Poor;
     }
 
+    void Good()
+    {
+        performance = Performance.Good;
+    }
+
+    #region BPM
     public struct BpmMatchData
     {
         public int bpm;
@@ -136,13 +154,10 @@ public class SongController : MonoBehaviour {
         {
             return -1;
         }
-        Debug.Log("AnalyzeBpm audioClipName : " + clip.name);
 
         int frequency = clip.frequency;
-        Debug.Log("Frequency : " + frequency);
 
         int channels = clip.channels;
-        Debug.Log("Channels : " + channels);
 
         int splitFrameSize = Mathf.FloorToInt(((float)frequency / (float)BASE_FREQUENCY) * ((float)channels / (float)BASE_CHANNELS) * (float)BASE_SPLIT_SAMPLE_SIZE);
 
@@ -155,14 +170,6 @@ public class SongController : MonoBehaviour {
 
         // Search bpm from volume array
         int bpm = SearchBpm(volumeArr, frequency, splitFrameSize);
-        Debug.Log("Matched BPM : " + bpm);
-
-        var strBuilder = new StringBuilder("BPM Match Data List\n");
-        for (int i = 0; i < bpmMatchDatas.Length; i++)
-        {
-            strBuilder.Append("bpm : " + bpmMatchDatas[i].bpm + ", match : " + Mathf.FloorToInt(bpmMatchDatas[i].match * 10000f) + "\n");
-        }
-        Debug.Log(strBuilder.ToString());
 
         return bpm;
     }
@@ -257,4 +264,5 @@ public class SongController : MonoBehaviour {
 
         return bpmMatchDatas[matchIndex].bpm;
     }
+    #endregion
 }

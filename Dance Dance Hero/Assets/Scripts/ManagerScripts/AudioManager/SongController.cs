@@ -48,6 +48,52 @@ public class SongController : MonoBehaviour {
         audioSource.Play();
     }
 
+    int stageSJLT(float remainingTime)
+    {
+        // Zone 1: 247 - 220 0
+        // Zone 2: 220 - 182 1
+        // Zone 3: 182 - 163 2
+        // Zone 5: 163 - 127 1
+        // Zone 6: 127 - 107 2
+        // Zone 7: 107 - 90 0
+        // Zone 8: 90 - 52 1
+        // Zone 9: 52 - 15 2
+        // Zone 10 : 15 - 0 0
+        if (remainingTime < 15)
+        {
+            return 0;
+        }
+        if (remainingTime < 56)
+        {
+            return 2;
+        }
+        if (remainingTime < 94)
+        {
+            return 1;
+        }
+        if (remainingTime < 111)
+        {
+            return 0;
+        }
+        if (remainingTime < 131)
+        {
+            return 2;
+        }
+        if (remainingTime < 167)
+        {
+            return 1;
+        }
+        if (remainingTime < 186)
+        {
+            return 2;
+        }
+        if (remainingTime < 224)
+        {
+            return 1;
+        }
+        return 0;
+    }
+
     void FixedUpdate() {
         currentTime += Time.fixedDeltaTime;
         if ((currentTime + startEarlyTime) % secondsPerBeat < Time.fixedDeltaTime)
@@ -61,50 +107,11 @@ public class SongController : MonoBehaviour {
         {
             orbManager.SpawnOrb();
             itemManager.SpawnSomething();
-            // Zone 1: 247 - 220 0
-            // Zone 2: 220 - 182 1
-            // Zone 3: 182 - 163 2
-            // Zone 5: 163 - 127 1
-            // Zone 6: 127 - 107 2
-            // Zone 7: 107 - 90 0
-            // Zone 8: 90 - 52 1
-            // Zone 9: 52 - 15 2
-            // Zone 10 : 15 - 0 0
+            
             float remainingTime = clipLength - audioSource.time;
             Debug.Log(remainingTime);
+            orbManager.stage = stageSJLT(remainingTime);
             Debug.Log(orbManager.stage);
-            if (remainingTime < 224)
-            {
-                orbManager.stage = 1;
-            }
-            if (remainingTime < 186)
-            {
-                orbManager.stage = 2;
-            }
-            if (remainingTime < 167)
-            {
-                orbManager.stage = 1;
-            }
-            if (remainingTime < 131)
-            {
-                orbManager.stage = 2;
-            }
-            if (remainingTime < 111)
-            {
-                orbManager.stage = 0;
-            }
-            if (remainingTime < 94)
-            {
-                orbManager.stage = 1;
-            }
-            if (remainingTime < 56)
-            {
-                orbManager.stage = 2;
-            }
-            if (remainingTime < 15)
-            {
-                orbManager.stage = 0;
-            }
         }
 	}
 

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class OrbManager : MonoBehaviour
@@ -12,6 +11,7 @@ public class OrbManager : MonoBehaviour
     public Material orbCol;
     public AudioClip spawnAudio;
     public int stage = 0;
+    public float scale = 1;
 
     public void SpawnOrb()
     {
@@ -71,24 +71,28 @@ public class OrbManager : MonoBehaviour
         // grabbed Kryptonite
         if (manager.punishOnBeat)
         {
-            ColorReturn();
+            scale = 1;
+            ReturnOffBeat();
+            return;
+        }
+
+        scale = 1.3f;
+        // haven't grabbed Sun
+        if (manager.punishOffBeat)
+        {
+            orbCol.SetColor("_Color", Color.red);
+            orbCol.SetColor("_EmissionColor", new Color(0.368f, 0.075f, 0.087f, 1.0f));
+            Invoke(nameof(ReturnOffBeat), 0.2f);
             return;
         }
 
         orbCol.SetColor("_Color", Color.red);
         orbCol.SetColor("_EmissionColor", new Color(0.368f, 0.075f, 0.087f, 1.0f));
-
-        // haven't grabbed Sun
-        if (manager.punishOffBeat)
-        {
-            Invoke(nameof(ColorReturn), 0.2f);
-            return;
-        }
-        return;
     }
 
-    private void ColorReturn()
+    private void ReturnOffBeat()
     {
+        scale = 1;
         orbCol.SetColor("_Color", Color.magenta);
         orbCol.SetColor("_EmissionColor", new Color(0.086f, 0.075f, 0.368f, 1.0f));
     }

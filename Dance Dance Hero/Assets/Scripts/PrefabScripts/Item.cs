@@ -23,7 +23,7 @@ public abstract class Item : MonoBehaviour
         velocity *= speed;
     }
 
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         transform.position += velocity * Time.fixedDeltaTime;
     }

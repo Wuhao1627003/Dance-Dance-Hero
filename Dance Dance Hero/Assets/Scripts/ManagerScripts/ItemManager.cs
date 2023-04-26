@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class ItemManager : MonoBehaviour
 {
@@ -11,11 +12,17 @@ public class ItemManager : MonoBehaviour
     public bool punishOnBeat { get; private set; }
     public List<Item> items = new List<Item>();
 
+    [SerializeField]
+    private PostProcessVolume postfx;
+    private ColorGrading cg;
+
     void Start()
     {
         punishOffBeat = true;
         punishOnBeat = false;
         initialCameraPosition = GameObject.Find("Main Camera").transform.position;
+        postfx = GameObject.Find("PostFX").GetComponent<PostProcessVolume>();
+        postfx.profile.TryGetSettings(out cg);
     }
 
     public void SpawnSomething()
@@ -43,6 +50,7 @@ public class ItemManager : MonoBehaviour
 
     public void HandleGrabSun()
     {
+        cg.colorFilter.value = Color.red;
         punishOffBeat = false;
         punishOnBeat = false;
         GameObject.Find("Score").GetComponent<Score>().IncreaseScore(1);
@@ -51,6 +59,7 @@ public class ItemManager : MonoBehaviour
 
     public void HandleGrabKryptonite()
     {
+        cg.colorFilter.value = Color.green;
         punishOffBeat = true;
         punishOnBeat = true;
         Invoke(nameof(RecoverPunishOnBeat), recoverTime);
@@ -58,11 +67,13 @@ public class ItemManager : MonoBehaviour
 
     private void RecoverPunishOffBeat()
     {
+        cg.colorFilter.value = Color.white;
         punishOffBeat = true;
     }
 
     private void RecoverPunishOnBeat()
     {
+        cg.colorFilter.value = Color.white;
         punishOnBeat = false;
     }
 }

@@ -15,30 +15,20 @@ public class OrbManager : MonoBehaviour
     public void SpawnOrb()
     {
         float rand = Random.value;
-        if (stage == 0)
-        {
-            if (rand < 0.5)
-            {
-                orbs.Add(Instantiate(orb).GetComponent<Orb>());
-            }
-        }
-        else if (stage == 1)
-        {
-            if (rand < 0.9)
-            {
-                orbs.Add(Instantiate(orb).GetComponent<Orb>());
-            }
-
-        }
+        if (stage == 0 && rand < 0.5) CreateOrb();
+        else if (stage == 1 && rand < 0.9) CreateOrb();
         else
         {
-            orbs.Add(Instantiate(orb).GetComponent<Orb>());
-
-            if (rand < 0.1)
-            {
-                orbs.Add(Instantiate(orb).GetComponent<Orb>());
-            }
+            CreateOrb();
+            if (rand < 0.1) CreateOrb();
         }
+    }
+
+    private void CreateOrb()
+    {
+        GameObject newOrb = Instantiate(orb);
+        newOrb.transform.localScale = scale * Vector3.one;
+        orbs.Add(newOrb.GetComponent<Orb>());
     }
 
     public void onBeatUpdate()

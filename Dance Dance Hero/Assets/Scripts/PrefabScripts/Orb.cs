@@ -16,5 +16,4 @@ public class Orb : Item
     public override void HandleEarthCollision()
     {
     }
-
 }

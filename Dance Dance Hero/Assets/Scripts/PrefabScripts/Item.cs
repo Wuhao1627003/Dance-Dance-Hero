@@ -6,12 +6,14 @@ public abstract class Item : MonoBehaviour
     public bool shootAtPlayer = false;
     public float speed = 0.2f;
     public Vector3 velocity = Vector3.down;
+    private Vector3 camPos;
+    public AudioClip spawnAudio;
 
     void Awake()
     {
         float radius = GameObject.Find("GlobalObject").GetComponent<OrbManager>().radius;
         Vector2 randomPointOnCircle = Random.insideUnitCircle * radius * 1.2f;
-        Vector3 camPos = GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition;
+        camPos = GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition;
         transform.position = new(randomPointOnCircle.x, camPos.y + 1.0f, randomPointOnCircle.y);
 
         if (shootAtPlayer)
@@ -32,6 +34,8 @@ public abstract class Item : MonoBehaviour
     {
         if (other.CompareTag("GameController"))
         {
+            AudioSource.PlayClipAtPoint(spawnAudio, camPos + (transform.position - camPos).normalized * 7);
+
             InputDevice device = InputDevices.GetDeviceAtXRNode(other.gameObject.name.Contains("Left") ? XRNode.LeftHand : XRNode.RightHand);
             HapticCapabilities capabilities;
             if (device.TryGetHapticCapabilities(out capabilities))
@@ -39,11 +43,12 @@ public abstract class Item : MonoBehaviour
                 if (capabilities.supportsImpulse)
                 {
                     uint channel = 0;
-                    float amplitude = 0.7f;
-                    float duration = 0.2f;
+                    float amplitude = 2.0f;
+                    float duration = 1.0f;
                     device.SendHapticImpulse(channel, amplitude, duration);
                 }
             }
+
             HandleGrab();
             Destroy(gameObject);
         }

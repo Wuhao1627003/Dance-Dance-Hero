@@ -624,12 +624,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orb: {fileID: 7833677552040238506, guid: f88d04f916bbfc04cb6a6ff9af511d57, type: 3}
-  scoreForOnBeatHit: 2
-  scoreForOffBeatHit: 1
+  scorePerfect: 10
+  scoreGood: 5
+  scorePoor: 1
   orbs: []
   orbCol: {fileID: 2100000, guid: 5e23e04118a96e34ca409b2dcf78397c, type: 2}
-  spawnAudio: {fileID: 8300000, guid: 3d7c6d167ca405c4ca05c7af3ffd8fd4, type: 3}
   stage: 0
+  scale: 1
 --- !u!114 &676323001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,7 +661,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ce9f728a1d799784c8bea46534bfefc4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.149
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0

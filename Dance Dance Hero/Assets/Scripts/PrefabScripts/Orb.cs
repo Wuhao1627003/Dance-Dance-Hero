@@ -21,5 +21,4 @@ public class Orb : Item
         AudioSource.PlayClipAtPoint(hitEarthAudio, transform.position);
         GameObject.Find("Health").GetComponent<Health>().DecreaseHealth(damage);
     }
-
 }

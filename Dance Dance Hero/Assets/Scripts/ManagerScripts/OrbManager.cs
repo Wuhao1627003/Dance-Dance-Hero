@@ -14,9 +14,9 @@ public class OrbManager : MonoBehaviour
     public void SpawnOrb()
     {
         float rand = Random.value;
-        if (stage == 0 && rand < 0.5) CreateOrb();
-        else if (stage == 1 && rand < 0.9) CreateOrb();
-        else
+        if (stage == 0 && rand < 0.1) CreateOrb();
+        else if (stage == 1 && rand < 0.2) CreateOrb();
+        else if (stage == 2)
         {
             CreateOrb();
             if (rand < 0.1) CreateOrb();

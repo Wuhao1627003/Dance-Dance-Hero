@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1299007508, guid: c634b046340e9484c9450187ac402fb7, type: 3}
-  m_Name: New Glyph 3D Config
+  m_Name: 3DMenuGlyphConfig
   m_EditorClassIdentifier: 
-  Text: "DANCE DANCE \nHERO"
+  Text: START
   FontScale: 2
   BezierSmoothness: 4
-  Thickness: 3
+  Thickness: 5
   PathToFont: C:/Users/nadin/Documents/Repositories/CIS-5680 Game Design/Dance-Dance-Hero/Dance
     Dance Hero/Assets/Fonts/BadaboomBB_Reg.ttf
   OneMeshPerCharacter: 1
@@ -26,9 +26,9 @@ MonoBehaviour:
   ReceiveShadows: 1
   UseLightProbes: 1
   CalculateTangents: 0
-  FrontMaterial: {fileID: 0}
-  BorderMaterial: {fileID: 0}
-  BackMaterial: {fileID: 0}
+  FrontMaterial: {fileID: 2100000, guid: a19118b324660fb469c65b99dc7faf06, type: 2}
+  BorderMaterial: {fileID: 2100000, guid: 951f9815711449c4da4a657357f9e9f3, type: 2}
+  BackMaterial: {fileID: 2100000, guid: 951f9815711449c4da4a657357f9e9f3, type: 2}
   UseVertexColors: 0
   FrontColor: {r: 0, g: 0, b: 0, a: 0}
   BorderColor: {r: 0, g: 0, b: 0, a: 0}

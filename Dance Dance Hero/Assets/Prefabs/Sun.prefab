@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3026985059292714182}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 17, y: 17, z: 17}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -131,4 +131,3 @@ MonoBehaviour:
   speed: 0.3
   velocity: {x: 0, y: -1, z: 0}
   punchAudio: {fileID: 8300000, guid: 3d7c6d167ca405c4ca05c7af3ffd8fd4, type: 3}
-  hitEarthAudio: {fileID: 0}

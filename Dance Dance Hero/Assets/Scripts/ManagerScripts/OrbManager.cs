@@ -8,7 +8,6 @@ public class OrbManager : MonoBehaviour
     public int scorePerfect = 10, scoreGood = 5, scorePoor = 1;
     public List<Orb> orbs = new List<Orb>();
     public Material orbCol;
-    public AudioClip spawnAudio;
     public int stage = 0;
     public float scale = 1;
 
@@ -63,7 +62,6 @@ public class OrbManager : MonoBehaviour
                 score = scorePerfect;
                 break;
         }
-        Debug.Log(score);
         GameObject.Find("Score").GetComponent<Score>().IncreaseScore(score);
     }
     public void Pulse()

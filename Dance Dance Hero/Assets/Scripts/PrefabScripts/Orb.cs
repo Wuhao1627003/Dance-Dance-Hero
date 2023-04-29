@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Orb : Item
 {
+    public AudioClip hitEarthAudio;
+
     public override void FixedUpdate()
     {
         transform.position += velocity * Time.fixedDeltaTime;
@@ -15,6 +17,7 @@ public class Orb : Item
 
     public override void HandleEarthCollision()
     {
+        AudioSource.PlayClipAtPoint(hitEarthAudio, transform.position);
     }
 
 }

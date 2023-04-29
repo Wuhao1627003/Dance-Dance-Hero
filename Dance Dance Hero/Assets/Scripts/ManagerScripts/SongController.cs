@@ -122,6 +122,8 @@ public class SongController : MonoBehaviour {
 
         if (currentTime >= clipLength - 1.0f)
         {
+            // TODO: End game and show score
+
             SceneManager.LoadScene("Menu");
         }
 	}

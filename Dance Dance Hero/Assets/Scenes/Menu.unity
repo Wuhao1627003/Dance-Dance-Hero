@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 49345480}
   - component: {fileID: 49345482}
   - component: {fileID: 49345481}
-  - component: {fileID: 49345483}
   m_Layer: 0
   m_Name: Letter_R
   m_TagString: Untagged
@@ -209,19 +208,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49345479}
   m_Mesh: {fileID: 1326487135}
---- !u!114 &49345483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49345479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45c4b139837a404488f49901569c971, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OutlineTint: {r: 1, g: 0.76470596, b: 0, a: 1}
 --- !u!1 &50134124
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,7 +963,6 @@ GameObject:
   - component: {fileID: 1018918495}
   - component: {fileID: 1018918497}
   - component: {fileID: 1018918496}
-  - component: {fileID: 1018918498}
   m_Layer: 0
   m_Name: Letter_S
   m_TagString: Untagged
@@ -1052,19 +1037,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018918494}
   m_Mesh: {fileID: 1406702704}
---- !u!114 &1018918498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018918494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45c4b139837a404488f49901569c971, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OutlineTint: {r: 1, g: 0.76470596, b: 0, a: 1}
 --- !u!43 &1326487135
 Mesh:
   m_ObjectHideFlags: 0
@@ -1451,17 +1423,17 @@ PrefabInstance:
     - target: {fileID: 2489335301551552118, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
       propertyPath: color.b
-      value: 0
+      value: 0.4879217
       objectReference: {fileID: 0}
     - target: {fileID: 2489335301551552118, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
       propertyPath: color.g
-      value: 0.54901963
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2489335301551552118, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
       propertyPath: color.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2489335301551552119, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
@@ -1480,6 +1452,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2489335301815861967, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489335301815861967, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -1492,6 +1469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Star C
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489335302292355153, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2489335302292355165, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
@@ -1506,7 +1488,7 @@ PrefabInstance:
     - target: {fileID: 2489335302292355165, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 409
+      value: 253
       objectReference: {fileID: 0}
     - target: {fileID: 2489335302292355165, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
@@ -1655,7 +1637,6 @@ GameObject:
   - component: {fileID: 1471920456}
   - component: {fileID: 1471920458}
   - component: {fileID: 1471920457}
-  - component: {fileID: 1471920459}
   m_Layer: 0
   m_Name: Letter_A
   m_TagString: Untagged
@@ -1730,19 +1711,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471920455}
   m_Mesh: {fileID: 2026039760}
---- !u!114 &1471920459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471920455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45c4b139837a404488f49901569c971, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OutlineTint: {r: 1, g: 0.76470596, b: 0, a: 1}
 --- !u!1 &1592470128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,7 +1930,6 @@ GameObject:
   - component: {fileID: 1608052080}
   - component: {fileID: 1608052082}
   - component: {fileID: 1608052081}
-  - component: {fileID: 1608052083}
   m_Layer: 0
   m_Name: Letter_T
   m_TagString: Untagged
@@ -2037,19 +2004,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608052079}
   m_Mesh: {fileID: 548531436}
---- !u!114 &1608052083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1608052079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45c4b139837a404488f49901569c971, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OutlineTint: {r: 1, g: 0.76470596, b: 0, a: 1}
 --- !u!43 &2026039760
 Mesh:
   m_ObjectHideFlags: 0
@@ -2361,7 +2315,6 @@ GameObject:
   - component: {fileID: 2099860421}
   - component: {fileID: 2099860423}
   - component: {fileID: 2099860422}
-  - component: {fileID: 2099860424}
   m_Layer: 0
   m_Name: Letter_T
   m_TagString: Untagged
@@ -2436,19 +2389,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099860420}
   m_Mesh: {fileID: 910200912}
---- !u!114 &2099860424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099860420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45c4b139837a404488f49901569c971, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OutlineTint: {r: 1, g: 0.76470596, b: 0, a: 1}
 --- !u!4 &2733142015087618579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2210139838675166438, guid: 7cf73664dd6b31f42b1f56bbe0bf1fb9,

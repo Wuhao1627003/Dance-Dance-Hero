@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootAtPlayer: 0
-  speed: 0.3
+  speed: 0.7
   velocity: {x: 0, y: -1, z: 0}
   punchAudio: {fileID: 8300000, guid: 3d7c6d167ca405c4ca05c7af3ffd8fd4, type: 3}
   hitEarthAudio: {fileID: 8300000, guid: be55700b6eaf96840ab69f3fd7e83b7d, type: 3}

@@ -14,7 +14,7 @@ public abstract class Item : MonoBehaviour
         float radius = 1.5f;
         Vector2 randomPointOnCircle = Random.insideUnitCircle.normalized * radius;
         camPos = GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition;
-        transform.position = new(randomPointOnCircle.x, camPos.y + 3.0f, Mathf.Abs(randomPointOnCircle.y));
+        transform.position = new(randomPointOnCircle.x, camPos.y + 3.0f, -1 * Mathf.Abs(randomPointOnCircle.y));
 
         if (shootAtPlayer)
         {
@@ -43,7 +43,7 @@ public abstract class Item : MonoBehaviour
                 if (capabilities.supportsImpulse)
                 {
                     uint channel = 0;
-                    float amplitude = 2.0f;
+                    float amplitude = 1.0f;
                     float duration = 1.0f;
                     device.SendHapticImpulse(channel, amplitude, duration);
                 }

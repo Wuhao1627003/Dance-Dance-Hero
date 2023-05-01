@@ -9,7 +9,7 @@ public class OrbManager : MonoBehaviour
     public List<Orb> orbs = new List<Orb>();
     public Material orbCol;
     public int stage = 0;
-    public float scale = 0.5f;
+    public float scale = 1;
 
     public void SpawnOrb()
     {
@@ -71,12 +71,12 @@ public class OrbManager : MonoBehaviour
         // grabbed Kryptonite
         if (manager.punishOnBeat)
         {
-            scale = 0.5f;
+            scale = 1;
             ReturnOffBeat();
             return;
         }
 
-        scale = 0.6f;
+        scale = 1.3f;
         // haven't grabbed Sun
         if (manager.punishOffBeat)
         {
@@ -92,7 +92,7 @@ public class OrbManager : MonoBehaviour
 
     private void ReturnOffBeat()
     {
-        scale = 0.5f;
+        scale = 1;
         orbCol.SetColor("_Color", Color.magenta);
         orbCol.SetColor("_EmissionColor", new Color(0.086f, 0.075f, 0.368f, 1.0f));
     }

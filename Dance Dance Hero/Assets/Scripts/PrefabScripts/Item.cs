@@ -11,10 +11,10 @@ public abstract class Item : MonoBehaviour
 
     void Awake()
     {
-        float radius = 1.5f;
-        Vector2 randomPointOnCircle = Random.insideUnitCircle.normalized * radius;
+        float radius = GameObject.Find("GlobalObject").GetComponent<OrbManager>().radius;
+        Vector2 randomPointOnCircle = Random.insideUnitCircle * radius * 1.2f;
         camPos = GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition;
-        transform.position = new(randomPointOnCircle.x, camPos.y + 3.0f, -1 * Mathf.Abs(randomPointOnCircle.y));
+        transform.position = new(randomPointOnCircle.x, camPos.y + 1.0f, randomPointOnCircle.y);
 
         if (shootAtPlayer)
         {

@@ -16,8 +16,6 @@ public class ItemManager : MonoBehaviour
     private PostProcessVolume postfx;
     private ColorGrading cg;
 
-    private OrbManager orbManager;
-
     void Start()
     {
         punishOffBeat = true;
@@ -25,38 +23,18 @@ public class ItemManager : MonoBehaviour
         initialCameraPosition = GameObject.Find("Main Camera").transform.position;
         postfx = GameObject.Find("PostFX").GetComponent<PostProcessVolume>();
         postfx.profile.TryGetSettings(out cg);
-        orbManager = GameObject.Find("GlobalObject").GetComponent<OrbManager>();
     }
 
     public void SpawnSomething()
     {
         float rand = Random.value;
-        if (orbManager.stage == 0)
+        if (rand < 0.1)
         {
-            return;
-        } else if (orbManager.stage == 1) 
+            SpawnSun();
+        }
+        else if (rand > 0.9)
         {
-            if (rand < 0.05)
-            {
-                if (rand < 0.025)
-                {
-                    SpawnSun();
-                } else
-                {
-                    SpawnKryptonite();
-                }
-            }
-            return;
-        } else
-        {
-            if (rand < 0.05)
-            {
-                SpawnSun();
-            }
-            else if (rand > 0.95)
-            {
-                SpawnKryptonite();
-            }
+            SpawnKryptonite();
         }
     }
 

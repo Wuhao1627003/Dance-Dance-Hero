@@ -1,9 +1,7 @@
 ﻿using System;
 using UnityEngine;
-using System.Text;
 using System.Linq;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 public enum Performance
 {
@@ -118,13 +116,6 @@ public class SongController : MonoBehaviour {
             
             float remainingTime = clipLength - audioSource.time;
             orbManager.stage = stageSJLT(remainingTime);
-        }
-
-        if (currentTime >= clipLength - 1.0f)
-        {
-            // TODO: End game and show score
-
-            SceneManager.LoadScene("Menu");
         }
 	}
 

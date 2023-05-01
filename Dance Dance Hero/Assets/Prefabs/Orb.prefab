@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7fe77f0293d89840846a0f42b9e3ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootAtPlayer: 0
+  shootAtPlayer: 1
   speed: 0.7
   velocity: {x: 0, y: -1, z: 0}
   punchAudio: {fileID: 8300000, guid: 3d7c6d167ca405c4ca05c7af3ffd8fd4, type: 3}

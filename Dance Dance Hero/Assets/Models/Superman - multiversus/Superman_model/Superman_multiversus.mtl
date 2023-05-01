@@ -1,0 +1,15 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl SupermanBase_MIC
+Ns 314.256201
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.136364 0.136364 0.136364
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump -bm 0.600000 C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\Superman\\Mesh\\Superman_N.png
+map_Kd C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\Superman\\Mesh\\Superman_D.png
+refl C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\Superman\\Mesh\\Superman_Metallic.png

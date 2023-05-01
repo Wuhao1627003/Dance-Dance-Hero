@@ -1,0 +1,61 @@
+# Blender MTL File: 'None'
+# Material Count: 5
+
+newmtl Material.001
+Ns 543.737609
+Ka 0.863636 0.863636 0.863636
+Kd 0.800000 0.800000 0.800000
+Ks 0.104545 0.104545 0.104545
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\WonderWomanV2\\Diana_Shield.png
+
+newmtl Material.002
+Ns 678.365713
+Ka 0.572727 0.572727 0.572727
+Kd 0.800000 0.800000 0.800000
+Ks 0.077273 0.077273 0.077273
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump -bm 0.700000 C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\WonderWomanV2\\SwordShield_Normal.png
+map_Kd C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\WonderWomanV2\\Wonder_Woman_1984_SwordShield_01_C.png
+
+newmtl WonderWomanBase_MIC
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.113636 0.113636 0.113636
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump -bm 0.700000 C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\WonderWomanV2\\Diana_Normal.png
+map_Kd C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\WonderWomanV2\\WW_base_01_C.png
+
+newmtl WonderWomanHair_MIC
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.100000 0.100000 0.100000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\WonderWomanV2\\DianaHair_Normal.png
+map_Kd C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\WonderWomanV2\\Diana_Hair_BaseColor.png
+
+newmtl WonderWomanHair_MIC.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.300000 0.300000 0.300000
+Ks 0.109091 0.109091 0.109091
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\WonderWomanV2\\DianaHair_Normal.png
+map_Kd C:\\Users\\jesse\\Downloads\\stuff to save\\Multiversus_\\Game\\Panda_Main\\Characters\\WonderWomanV2\\Diana_Hair_BaseColor.png

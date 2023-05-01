@@ -43,7 +43,7 @@ public abstract class Item : MonoBehaviour
                 if (capabilities.supportsImpulse)
                 {
                     uint channel = 0;
-                    float amplitude = 2.0f;
+                    float amplitude = 1.0f;
                     float duration = 1.0f;
                     device.SendHapticImpulse(channel, amplitude, duration);
                 }

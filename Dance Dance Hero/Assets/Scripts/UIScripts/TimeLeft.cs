@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TimeLeft : MonoBehaviour
@@ -28,6 +29,12 @@ public class TimeLeft : MonoBehaviour
         lastTime = currentTime;
         long minutes = secondsLeft / 60;
         long seconds = secondsLeft % 60;
+        if (secondsLeft <= 0)
+        {
+            // TODO: End game and show score
+
+            SceneManager.LoadScene("Menu");
+        }
         timeText.text = "Time left: " + minutes.ToString() + "m " + seconds.ToString() + "s";
     }
 }

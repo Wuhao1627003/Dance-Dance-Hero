@@ -72,3 +72,5 @@ Dance Dance Hero/[Aa]ssets/[Ss]treamingAssets/aa.meta
 Dance Dance Hero/[Aa]ssets/[Ss]treamingAssets/aa/*
 *.log
 Dance Dance Hero/Library/Artifacts/*
+Dance Dance Hero/Assets/HTC.UnityPlugin
+Dance Dance Hero/Assets/HTC.UnityPlugin.meta

@@ -36,17 +36,21 @@ public class SongController : MonoBehaviour {
     public AudioSource beatPlayer;
     public AudioClip one, two, three, poor, good, perfect;
 
+    private GameObject globalObj;
+
     public Performance performance { get; private set; }
 
     void Start() {
-		audioSource = GameObject.Find("GlobalObject").GetComponent<AudioSource>();
+        globalObj = GameObject.Find("GlobalObject");
+
+        audioSource = globalObj.GetComponent<AudioSource>();
 
         performance = Performance.Poor;
         orb = GameObject.Find("Orb");
         clipLength = audioSource.clip.length;
 
-        orbManager = GameObject.Find("GlobalObject").GetComponent<OrbManager>();
-        itemManager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
+        orbManager = globalObj.GetComponent<OrbManager>();
+        itemManager = globalObj.GetComponent<ItemManager>();
 
         // Preprocess entire audio file upfront
         int avgBpm = AnalyzeBpm(audioSource.clip);

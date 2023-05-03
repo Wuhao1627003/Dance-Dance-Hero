@@ -11,12 +11,17 @@ public class OrbManager : MonoBehaviour
     public int stage = 0;
     public float scale = 0.5f;
 
-    private Color orbDefault = new Color(1.0f, 0.8165964f, 0.0f, 1.0f);
-    private Color orbBeat = new Color(0.9712478f, 1.0f, 0.0f, 1.0f);
+    public GameObject[] hitEffects;
+
+    private GameObject globalObj;
+
+    public Color orbDefault = new Color(1.0f, 0.8165964f, 0.0f, 1.0f);
+    public Color orbBeat = new Color(0.9712478f, 1.0f, 0.0f, 1.0f);
 
     private void Start()
     {
         orbCol.SetColor("_MainColor", orbDefault);
+        globalObj = GameObject.Find("GlobalObject");
     }
 
     public void SpawnOrb()
@@ -57,8 +62,8 @@ public class OrbManager : MonoBehaviour
     public void HandlePunch()
     {
         int score = scorePoor;
-        ItemManager manager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
-        Performance performance = GameObject.Find("GlobalObject").GetComponent<SongController>().performance;
+        ItemManager manager = globalObj.GetComponent<ItemManager>();
+        Performance performance = globalObj.GetComponent<SongController>().performance;
 
         if (manager.punishOnBeat)
         {
@@ -69,23 +74,31 @@ public class OrbManager : MonoBehaviour
             performance = Performance.Perfect;
         }
 
+        GameObject hitEffect = hitEffects[0];
         switch (performance)
         {
             case Performance.Poor:
                 score = scorePoor;
+                hitEffect = hitEffects[0];
                 break;
             case Performance.Good:
                 score = scoreGood;
+                hitEffect = hitEffects[1];
                 break;
             case Performance.Perfect:
                 score = scorePerfect;
+                hitEffect = hitEffects[2];
                 break;
         }
+
+        Instantiate(hitEffect, orb.transform);
+        Destroy(hitEffect, 1.0f);
+
         GameObject.Find("Score").GetComponent<Score>().IncreaseScore(score);
     }
     public void Pulse()
     {
-        ItemManager manager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
+        ItemManager manager = globalObj.GetComponent<ItemManager>();
 
         // grabbed Kryptonite
         if (manager.punishOnBeat)

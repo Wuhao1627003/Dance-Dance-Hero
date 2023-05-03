@@ -9,11 +9,14 @@ public abstract class Item : MonoBehaviour
     private Vector3 camPos;
     public AudioClip punchAudio;
 
+    private GameObject globalObj;
+
     void Awake()
     {
+        globalObj = GameObject.Find("GlobalObject");
         float radius = 1.5f;
         Vector2 randomPointOnCircle = Random.insideUnitCircle.normalized * radius;
-        camPos = GameObject.Find("GlobalObject").GetComponent<ItemManager>().initialCameraPosition;
+        camPos = globalObj.GetComponent<ItemManager>().initialCameraPosition;
         transform.position = new(randomPointOnCircle.x, camPos.y + 3.0f, -1 * Mathf.Abs(randomPointOnCircle.y));
 
         if (shootAtPlayer)
@@ -34,7 +37,7 @@ public abstract class Item : MonoBehaviour
     {
         if (other.CompareTag("GameController"))
         {
-            AudioSource.PlayClipAtPoint(punchAudio, camPos + (transform.position - camPos).normalized * 7);
+            AudioSource.PlayClipAtPoint(punchAudio, camPos + (transform.position - camPos).normalized * 7, 1.0f);
 
             InputDevice device = InputDevices.GetDeviceAtXRNode(other.gameObject.name.Contains("Left") ? XRNode.LeftHand : XRNode.RightHand);
             HapticCapabilities capabilities;
@@ -61,20 +64,18 @@ public abstract class Item : MonoBehaviour
 
     private void OnDestroy()
     {
-        var go = GameObject.Find("GlobalObject");
-
-        if (go == null)
+        if (globalObj == null)
         {
             return;
         }
 
         if (gameObject.GetComponent<Orb>())
         {
-            go.GetComponent<OrbManager>().orbs.Remove(gameObject.GetComponent<Orb>());
+            globalObj.GetComponent<OrbManager>().orbs.Remove(gameObject.GetComponent<Orb>());
         }
         else
         {
-            go.GetComponent<ItemManager>().items.Remove(gameObject.GetComponent<Item>());
+            globalObj.GetComponent<ItemManager>().items.Remove(gameObject.GetComponent<Item>());
         }
     }
 

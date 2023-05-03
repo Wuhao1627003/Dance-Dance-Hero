@@ -440,9 +440,89 @@ PrefabInstance:
       propertyPath: Sun
       value: 
       objectReference: {fileID: 705507994}
+    - target: {fileID: 359446476, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c2e22098ce7c8da4590cceb5113bd50e, type: 3}
+--- !u!1001 &665002453
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5591289672327391695, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_Name
+      value: Poor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591289672327624175, guid: 6d79e3726dad27b41928a64ad0ccdca9,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d79e3726dad27b41928a64ad0ccdca9, type: 3}
 --- !u!1 &676322995
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,9 +579,12 @@ MonoBehaviour:
   orbCol: {fileID: 2100000, guid: 5e23e04118a96e34ca409b2dcf78397c, type: 2}
   stage: 0
   scale: 1
-  orbDefault: {r: 1, g: 0.8165964, b: 0, a: 1}
-  rimDefault: {r: 1, g: 0, b: 0, a: 1}
-  orbBeat: {r: 246, g: 255, b: 0, a: 1}
+  hitEffects:
+  - {fileID: 5591289672327391695, guid: 6d79e3726dad27b41928a64ad0ccdca9, type: 3}
+  - {fileID: 4317617854267832353, guid: d66110afb547f4f419f95e29644cc042, type: 3}
+  - {fileID: 5377860328927617881, guid: 34c84fb2412bac948b6e4c1387e75fb4, type: 3}
+  orbDefault: {r: 1, g: 0.60491765, b: 0, a: 1}
+  orbBeat: {r: 0.9712478, g: 1, b: 0, a: 1}
 --- !u!114 &676323001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,12 +720,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatPlayer: {fileID: 564781162}
-  one: {fileID: 0}
-  two: {fileID: 0}
-  three: {fileID: 0}
-  poor: {fileID: 0}
-  good: {fileID: 0}
-  perfect: {fileID: 0}
+  one: {fileID: 8300000, guid: 30eeb24607c1cc94da9ba9a4fa48c9b1, type: 3}
+  two: {fileID: 8300000, guid: d90cd9368a832324ea13ce340f8fc3e0, type: 3}
+  three: {fileID: 8300000, guid: e6cfb91cdf2269047a5d9fd9d8d04398, type: 3}
+  poor: {fileID: 8300000, guid: abe9d4a35c697a640a1049aa530974a0, type: 3}
+  good: {fileID: 8300000, guid: d05bf4fa692387041a55ddcc8eaca2c1, type: 3}
+  perfect: {fileID: 8300000, guid: db2973bad426b04449e256a26561c5d0, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

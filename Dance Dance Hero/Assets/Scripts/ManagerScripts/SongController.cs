@@ -106,6 +106,18 @@ public class SongController : MonoBehaviour {
         return 0;
     }
 
+    int stageUptownFunk(float remainingTime)
+    {
+        // TODO
+        return 0;
+    }
+
+    int stageCosmicGirl(float remainingTime)
+    {
+        // TODO
+        return 0;
+    }
+
     void FixedUpdate() {
         currentTime += Time.fixedDeltaTime;
         if ((currentTime + timePerfect) % secondsPerBeat < Time.fixedDeltaTime)
@@ -123,7 +135,19 @@ public class SongController : MonoBehaviour {
             itemManager.SpawnSomething();
             
             float remainingTime = clipLength - audioSource.time;
-            orbManager.stage = stageSJLT(remainingTime);
+            switch (SongSelectionController.songSelected)
+            {
+                case 0:
+                    orbManager.stage = stageSJLT(remainingTime);
+                    break;
+                case 1:
+                    orbManager.stage = stageUptownFunk(remainingTime);
+                    break;
+                default:
+                    orbManager.stage = stageCosmicGirl(remainingTime);
+                    break;
+            }
+            
         }
 	}
 

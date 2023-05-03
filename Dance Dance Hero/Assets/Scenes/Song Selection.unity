@@ -616,6 +616,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &393229485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 393229487}
+  - component: {fileID: 393229486}
+  m_Layer: 0
+  m_Name: GlobalObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &393229486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393229485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb3862658362174a991ee24c683dc91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &393229487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393229485}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &644175134
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,8 +670,8 @@ GameObject:
   m_Component:
   - component: {fileID: 644175138}
   - component: {fileID: 644175137}
-  - component: {fileID: 644175136}
   - component: {fileID: 644175135}
+  - component: {fileID: 644175139}
   m_Layer: 0
   m_Name: SONG 3 BUTTON
   m_TagString: Untagged
@@ -651,19 +695,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
---- !u!114 &644175136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644175134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acf7b1dd44477c34d8f31c4343c13826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: GamePlay
 --- !u!65 &644175137
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -694,6 +725,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &644175139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644175134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841a069e95016b34a9b186819e60c94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songSelected: 2
 --- !u!43 &662299421
 Mesh:
   m_ObjectHideFlags: 0
@@ -1419,8 +1463,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1210833363}
   - component: {fileID: 1210833362}
-  - component: {fileID: 1210833361}
   - component: {fileID: 1210833360}
+  - component: {fileID: 1210833364}
   m_Layer: 0
   m_Name: SONG 2 BUTTON
   m_TagString: Untagged
@@ -1444,19 +1488,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
---- !u!114 &1210833361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210833359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acf7b1dd44477c34d8f31c4343c13826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: GamePlay
 --- !u!65 &1210833362
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1487,6 +1518,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1210833364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210833359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841a069e95016b34a9b186819e60c94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songSelected: 1
 --- !u!1001 &1441394741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1615,22 +1659,22 @@ PrefabInstance:
     - target: {fileID: 2489335302292355165, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.998164
+      value: -0.99295825
       objectReference: {fileID: 0}
     - target: {fileID: 2489335302292355165, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.059583765
+      value: -0.115008086
       objectReference: {fileID: 0}
     - target: {fileID: 2489335302292355165, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.010862928
+      value: 0.028219758
       objectReference: {fileID: 0}
     - target: {fileID: 2489335302292355165, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00060598395
+      value: -0.0032688777
       objectReference: {fileID: 0}
     - target: {fileID: 2489335302292355165, guid: 83d78c586728e9e4cbc2ad7cc94b42ea,
         type: 3}
@@ -1820,8 +1864,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1592782787}
   - component: {fileID: 1592782788}
-  - component: {fileID: 1592782789}
   - component: {fileID: 1592782790}
+  - component: {fileID: 1592782791}
   m_Layer: 0
   m_Name: SONG 1 BUTTON
   m_TagString: Untagged
@@ -1859,19 +1903,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 25.065647, y: 19.379913, z: 10.407112}
   m_Center: {x: 0.75380707, y: 8.904079, z: 3.902748}
---- !u!114 &1592782789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592782786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acf7b1dd44477c34d8f31c4343c13826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneToLoad: GamePlay
 --- !u!54 &1592782790
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1888,6 +1919,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!114 &1592782791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592782786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841a069e95016b34a9b186819e60c94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songSelected: 0
 --- !u!1001 &1695251070
 PrefabInstance:
   m_ObjectHideFlags: 0

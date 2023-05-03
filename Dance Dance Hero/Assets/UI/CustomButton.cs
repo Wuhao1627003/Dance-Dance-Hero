@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class CustomButton : MonoBehaviour
 {
+
+    public string sceneToLoad;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,17 +20,14 @@ public class CustomButton : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Got here 1");
-
         if (other.CompareTag("GameController"))
         {
-            Debug.Log("Got here 2");
             StartGame();
         }
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene("GamePlay");
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

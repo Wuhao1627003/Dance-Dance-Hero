@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2489335301551552113}
   - component: {fileID: 2489335301551552118}
   m_Layer: 0
-  m_Name: Flare (Purple)
+  m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceMaterial: {fileID: 2100000, guid: 6a3abff3452971642a88a704ff99cb5d, type: 2}
   mesh: {fileID: 0}
-  followCameras: 0
+  followCameras: 1
   followDistance: 100
   cameraOffset: 0
   model: {fileID: 2489335301815861964}
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91ca362837d5a4479a1f2aed66df832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 0, g: 1, b: 0.4879217, a: 1}
   ease: 8
   sharpnessR: -2.14
   sharpnessG: -6.09
@@ -217,15 +217,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2489335302292355153}
-  m_LocalRotation: {x: 0.19325408, y: 0.17286812, z: 0.053693518, w: 0.96430624}
+  m_LocalRotation: {x: 0.19325271, y: 0.17287031, z: 0.053697426, w: 0.96430594}
   m_LocalPosition: {x: 1000, y: -1000, z: 2444}
-  m_LocalScale: {x: 500, y: 500, z: 500}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 198.9, y: 198.9, z: 198.9}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2489335301551552116}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20.741, y: 22.253, z: 10.497}
 --- !u!114 &2489335302292355152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,5 +238,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d64e15c7413fe04d8309b71513bf9a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollWithCamera: 0
-  avoidClipping: 1
+  rollWithCamera: 1
+  avoidClipping: 0

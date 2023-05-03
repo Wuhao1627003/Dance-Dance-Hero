@@ -41,7 +41,7 @@ MonoBehaviour:
     value: 0
   DepthOverlap:
     overrideState: 1
-    value: 1
+    value: 5000
   DepthCulling:
     overrideState: 1
     value: 1
@@ -65,10 +65,10 @@ MonoBehaviour:
     value: 4
   DownsampleSize:
     overrideState: 1
-    value: 1024
+    value: 1450
   OverGlow:
     overrideState: 1
-    value: 3
+    value: 4.82
   Hardness:
     overrideState: 1
-    value: 0
+    value: 0.112

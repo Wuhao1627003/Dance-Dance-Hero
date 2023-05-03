@@ -33,6 +33,9 @@ public class SongController : MonoBehaviour {
     private OrbManager orbManager;
     private ItemManager itemManager;
 
+    public AudioSource beatPlayer;
+    public AudioClip one, two, three, poor, good, perfect;
+
     public Performance performance { get; private set; }
 
     void Start() {
@@ -46,7 +49,7 @@ public class SongController : MonoBehaviour {
         itemManager = GameObject.Find("GlobalObject").GetComponent<ItemManager>();
 
         // Preprocess entire audio file upfront
-        int avgBpm = AnalyzeBpm(audioSource.clip) / 2;
+        int avgBpm = AnalyzeBpm(audioSource.clip);
         secondsPerBeat = 60.0f / (float)avgBpm;
         timeGood = 0.5f * secondsPerBeat;
         timePerfect = 0.1f * secondsPerBeat;
@@ -104,9 +107,10 @@ public class SongController : MonoBehaviour {
         if ((currentTime + timePerfect) % secondsPerBeat < Time.fixedDeltaTime)
         {
             performance = Performance.Perfect;
-            orbManager.onBeatUpdate();
             Invoke(nameof(Good), timePerfect * 2);
             Invoke(nameof(Poor), timePerfect + timeGood);
+            beatPlayer.Play();
+            orbManager.onBeatUpdate();
         }
 
         if ((currentTime) % secondsPerBeat < Time.fixedDeltaTime)

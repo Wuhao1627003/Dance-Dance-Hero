@@ -45,11 +45,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FlowTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 4012f49ff9f04fa48b3bde7dbc6229a7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0f27ed02161e14e449be0a574d53316f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -57,7 +57,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 11700000, guid: 031334f6c965af448a549e951b9e7b0e, type: 2}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -74,26 +74,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 1
+    - _Brightness: 1.8
     - _BumpScale: 1
     - _CW_DisableFog: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FlowStrength: 1
+    - _FlowStrength: 1.22
     - _GlossMapScale: 1
     - _Glossiness: 0.64
     - _GlossyReflections: 1
-    - _MainWarp: 1.21
+    - _MainWarp: 0.01
     - _Metallic: 1
     - _Mode: 0
-    - _NoiseOctaves: 5.47
+    - _NoiseOctaves: 6
     - _NoiseSpeed: 10
-    - _NoiseStrength: 0.1
-    - _NoiseTile: 1
+    - _NoiseStrength: 0.77
+    - _NoiseTile: 20
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimPower: 0.4
+    - _RimPower: 0.32
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -102,9 +102,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 1, a: 1}
-    - _EmissionColor: {r: 0.086, g: 0.075, b: 0.368, a: 1}
-    - _NoiseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0, g: 0.017170362, b: 0.1981132, a: 1}
-    - _SunspotsColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 255, g: 208, b: 0, a: 1}
+    - _EmissionColor: {r: 0.368, g: 0.075, b: 0.087, a: 1}
+    - _MainColor: {r: 1, g: 0.8165964, b: 0, a: 1}
+    - _NoiseColor: {r: 0.09099997, g: 0.29099998, b: 1, a: 1}
+    - _RimColor: {r: 1, g: 0, b: 0, a: 1}
+    - _SunspotsColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

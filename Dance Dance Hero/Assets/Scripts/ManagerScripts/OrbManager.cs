@@ -11,6 +11,14 @@ public class OrbManager : MonoBehaviour
     public int stage = 0;
     public float scale = 0.5f;
 
+    private Color orbDefault = new Color(1.0f, 0.8165964f, 0.0f, 1.0f);
+    private Color orbBeat = new Color(0.9712478f, 1.0f, 0.0f, 1.0f);
+
+    private void Start()
+    {
+        orbCol.SetColor("_MainColor", orbDefault);
+    }
+
     public void SpawnOrb()
     {
         float rand = Random.value;
@@ -87,25 +95,22 @@ public class OrbManager : MonoBehaviour
             return;
         }
 
-        scale = 0.6f;
+        scale = 0.55f;
         // haven't grabbed Sun
         if (manager.punishOffBeat)
         {
-            orbCol.SetColor("_Color", Color.red);
-            orbCol.SetColor("_EmissionColor", new Color(0.368f, 0.075f, 0.087f, 1.0f));
-            Invoke(nameof(ReturnOffBeat), 0.2f);
+            orbCol.SetColor("_MainColor", orbBeat);
+            Invoke(nameof(ReturnOffBeat), 0.1f);
             return;
         }
 
-        orbCol.SetColor("_Color", Color.red);
-        orbCol.SetColor("_EmissionColor", new Color(0.368f, 0.075f, 0.087f, 1.0f));
+        orbCol.SetColor("_MainColor", orbBeat);
     }
 
     private void ReturnOffBeat()
     {
         scale = 0.5f;
-        orbCol.SetColor("_Color", Color.magenta);
-        orbCol.SetColor("_EmissionColor", new Color(0.086f, 0.075f, 0.368f, 1.0f));
+        orbCol.SetColor("_MainColor", orbDefault);
     }
 
 }

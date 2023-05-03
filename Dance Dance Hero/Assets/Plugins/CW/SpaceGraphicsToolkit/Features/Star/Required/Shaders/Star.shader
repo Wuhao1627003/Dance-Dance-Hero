@@ -19,13 +19,13 @@ Shader "Space Graphics Toolkit/Star"
       
 
 
-	_Color("Color", Color) = (1,1,1,1)
+	_MainColor("_MainColor", Color) = (1,1,1,1)
 	_Brightness("Brightness", Float) = 1.0
 	_MainWarp("Noise Warp", Float) = 0.005
 	[NoScaleOffset]_MainTex("Texture (RGB)", 2D) = "white" {}
 
 	[Header(RIM)]
-	_RimColor("	Color", Color) = (1,1,1,1)
+	_RimColor("_RimColor", Color) = (1,1,1,1)
 	_RimPower("	Power", Float) = 2.0
 
 	[Header(NOISE)]
@@ -40,7 +40,7 @@ Shader "Space Graphics Toolkit/Star"
 	[NoScaleOffset]_FlowTex("	Texture (A)", 2D) = "black" {}
 
 	[Header(SUNSPOTS)]
-	_SunspotsColor("	Color", Color) = (1,1,1,1)
+	_SunspotsColor("	SpotColor", Color) = (1,1,1,1)
 	_SunspotsStrength("	Strength", Float) = 1.0
 	_SunspotsWarp("	Noise Warp", Float) = 0.005
 	[NoScaleOffset]_SunspotsTex("	Texture (A)", 2D) = "gray" {}
@@ -1768,7 +1768,7 @@ Shader "Space Graphics Toolkit/Star"
          
 
 
-	float3    _Color;
+	float3    _MainColor;
 	float     _Brightness;
 	sampler2D _MainTex;
 	float     _MainWarp;
@@ -1864,7 +1864,7 @@ Shader "Space Graphics Toolkit/Star"
 		float rim = 1.0f - pow(1.0f - nfDot, _RimPower);
 
 		float2 mt_uv = d.texcoord0.xy; mt_uv.x += noise * _MainWarp;
-		float3 finalAlbedo = lerp(_RimColor, _Color, rim) * tex2D(_MainTex, mt_uv).xyz * _Brightness;
+		float3 finalAlbedo = lerp(_RimColor, _MainColor, rim) * tex2D(_MainTex, mt_uv).xyz * _Brightness;
 
 		// Mix in noise
 		finalAlbedo += _NoiseColor * _NoiseStrength * noise;
@@ -4211,7 +4211,7 @@ Shader "Space Graphics Toolkit/Star"
          
 
 
-	float3    _Color;
+	float3    _MainColor;
 	float     _Brightness;
 	sampler2D _MainTex;
 	float     _MainWarp;
@@ -4307,7 +4307,7 @@ Shader "Space Graphics Toolkit/Star"
 		float rim = 1.0f - pow(1.0f - nfDot, _RimPower);
 
 		float2 mt_uv = d.texcoord0.xy; mt_uv.x += noise * _MainWarp;
-		float3 finalAlbedo = lerp(_RimColor, _Color, rim) * tex2D(_MainTex, mt_uv).xyz * _Brightness;
+		float3 finalAlbedo = lerp(_RimColor, _MainColor, rim) * tex2D(_MainTex, mt_uv).xyz * _Brightness;
 
 		// Mix in noise
 		finalAlbedo += _NoiseColor * _NoiseStrength * noise;
@@ -6512,7 +6512,7 @@ Shader "Space Graphics Toolkit/Star"
          
 
 
-	float3    _Color;
+	float3    _MainColor;
 	float     _Brightness;
 	sampler2D _MainTex;
 	float     _MainWarp;
@@ -6608,7 +6608,7 @@ Shader "Space Graphics Toolkit/Star"
 		float rim = 1.0f - pow(1.0f - nfDot, _RimPower);
 
 		float2 mt_uv = d.texcoord0.xy; mt_uv.x += noise * _MainWarp;
-		float3 finalAlbedo = lerp(_RimColor, _Color, rim) * tex2D(_MainTex, mt_uv).xyz * _Brightness;
+		float3 finalAlbedo = lerp(_RimColor, _MainColor, rim) * tex2D(_MainTex, mt_uv).xyz * _Brightness;
 
 		// Mix in noise
 		finalAlbedo += _NoiseColor * _NoiseStrength * noise;

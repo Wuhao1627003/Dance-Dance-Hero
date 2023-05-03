@@ -35,7 +35,7 @@ MonoBehaviour:
     value: 1
   OutlineThickness:
     overrideState: 1
-    value: 4
+    value: 3
   OutlineFillAmount:
     overrideState: 1
     value: 0
@@ -46,10 +46,10 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   InvertDepthCulling:
-    overrideState: 1
+    overrideState: 0
     value: 0
   DepthOutlineBreak:
-    overrideState: 1
+    overrideState: 0
     value: 0
   CornerOutlines:
     overrideState: 1
@@ -62,13 +62,13 @@ MonoBehaviour:
     value: {x: 0.5, y: 2}
   Iterations:
     overrideState: 1
-    value: 4
+    value: 2
   DownsampleSize:
     overrideState: 1
-    value: 1450
+    value: 1684
   OverGlow:
     overrideState: 1
-    value: 4.82
+    value: 5.36
   Hardness:
     overrideState: 1
-    value: 0.112
+    value: 0

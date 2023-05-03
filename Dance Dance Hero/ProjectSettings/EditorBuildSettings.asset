@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 607d4fcfa41379745ad74248fa918748
+  - enabled: 1
+    path: Assets/Scenes/Song Selection.unity
+    guid: 3fa592f532f49ce4395b9bd01a2d726a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260,
       type: 2}

@@ -647,9 +647,9 @@ MonoBehaviour:
   one: {fileID: 8300000, guid: 30eeb24607c1cc94da9ba9a4fa48c9b1, type: 3}
   two: {fileID: 8300000, guid: d90cd9368a832324ea13ce340f8fc3e0, type: 3}
   three: {fileID: 8300000, guid: e6cfb91cdf2269047a5d9fd9d8d04398, type: 3}
-  poor: {fileID: 8300000, guid: abe9d4a35c697a640a1049aa530974a0, type: 3}
-  good: {fileID: 8300000, guid: d05bf4fa692387041a55ddcc8eaca2c1, type: 3}
-  perfect: {fileID: 8300000, guid: db2973bad426b04449e256a26561c5d0, type: 3}
+  poor: {fileID: 8300000, guid: c1a0a244280d05f4c8d23f1ab32e02b8, type: 3}
+  good: {fileID: 8300000, guid: b5d4f401a6cc83547ab4b843e2f12a39, type: 3}
+  perfect: {fileID: 8300000, guid: 217e6a8ede505d949b11fd82caa5e41e, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

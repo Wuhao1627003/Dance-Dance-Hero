@@ -29,7 +29,7 @@ public class SongController : MonoBehaviour {
 
     private GameObject orb;
     private float secondsPerBeat, clipLength, timeGood, timePerfect;
-    private float currentTime = 0.7f;
+    private float currentTime = 0.15f;
     private OrbManager orbManager;
     private ItemManager itemManager;
 
@@ -53,8 +53,9 @@ public class SongController : MonoBehaviour {
         itemManager = globalObj.GetComponent<ItemManager>();
 
         // Preprocess entire audio file upfront
-        int avgBpm = AnalyzeBpm(audioSource.clip);
-        secondsPerBeat = 60.0f / (float)avgBpm;
+        float avgBpm = AnalyzeBpm(audioSource.clip);
+        Debug.Log(avgBpm);
+        secondsPerBeat = 60.0f / avgBpm;
         timeGood = 0.5f * secondsPerBeat;
         timePerfect = 0.1f * secondsPerBeat;
         audioSource.Play();
@@ -118,6 +119,51 @@ public class SongController : MonoBehaviour {
         return 0;
     }
 
+    int stageHero(float remainingTime)
+    {
+        // Zone 1: 247 - 220 0
+        // Zone 2: 220 - 182 1
+        // Zone 3: 182 - 163 2
+        // Zone 5: 163 - 127 1
+        // Zone 6: 127 - 107 2
+        // Zone 7: 107 - 90 0
+        // Zone 8: 90 - 52 1
+        // Zone 9: 52 - 15 2
+        // Zone 10 : 15 - 0 0
+        if (remainingTime < 15)
+        {
+            return 0;
+        }
+        if (remainingTime < 56)
+        {
+            return 2;
+        }
+        if (remainingTime < 94)
+        {
+            return 1;
+        }
+        if (remainingTime < 111)
+        {
+            return 0;
+        }
+        if (remainingTime < 131)
+        {
+            return 2;
+        }
+        if (remainingTime < 167)
+        {
+            return 1;
+        }
+        if (remainingTime < 186)
+        {
+            return 2;
+        }
+        if (remainingTime < 224)
+        {
+            return 1;
+        }
+        return 0;
+    }
     void FixedUpdate() {
         currentTime += Time.fixedDeltaTime;
         if ((currentTime + timePerfect) % secondsPerBeat < Time.fixedDeltaTime)
@@ -129,7 +175,7 @@ public class SongController : MonoBehaviour {
             orbManager.onBeatUpdate();
         }
 
-        if ((currentTime) % secondsPerBeat < Time.fixedDeltaTime)
+        if (currentTime % secondsPerBeat < Time.fixedDeltaTime)
         {
             orbManager.SpawnOrb();
             itemManager.SpawnSomething();
@@ -147,9 +193,8 @@ public class SongController : MonoBehaviour {
                     orbManager.stage = stageCosmicGirl(remainingTime);
                     break;
             }
-            
         }
-	}
+    }
 
     void Poor()
     {

@@ -28,10 +28,10 @@ public class OrbManager : MonoBehaviour
     {
         float rand = Random.value;
         if (stage == 0 && rand < 0.5) CreateOrb();
-        else if (stage == 1 && rand < 0.7) CreateOrb();
+        else if (stage == 1 && rand < 0.65) CreateOrb();
         else if (stage == 2)
         {
-            if(rand < 0.75)
+            if (rand < 0.7)
             {
                 if (rand < 0.25)
                 {
@@ -43,7 +43,7 @@ public class OrbManager : MonoBehaviour
                     CreateOrb();
                 }
             }
-            
+
         }
     }
 
@@ -59,7 +59,7 @@ public class OrbManager : MonoBehaviour
         Pulse();
     }
 
-    public void HandlePunch()
+    public void HandlePunch(Vector3 orbPos)
     {
         int score = scorePoor;
         ItemManager manager = globalObj.GetComponent<ItemManager>();
@@ -91,8 +91,8 @@ public class OrbManager : MonoBehaviour
                 break;
         }
 
-        Instantiate(hitEffect, orb.transform);
-        Destroy(hitEffect, 1.0f);
+        GameObject effect = Instantiate(hitEffect, orbPos, Quaternion.identity);
+        Destroy(effect, 0.75f);
 
         GameObject.Find("Score").GetComponent<Score>().IncreaseScore(score);
     }
@@ -108,7 +108,7 @@ public class OrbManager : MonoBehaviour
             return;
         }
 
-        scale = 0.55f;
+        scale = 0.7f;
         // haven't grabbed Sun
         if (manager.punishOffBeat)
         {

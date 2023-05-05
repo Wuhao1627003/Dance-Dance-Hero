@@ -11,53 +11,24 @@ public enum SpawnMethod
 public abstract class Item : MonoBehaviour
 {
     public float speed = 0.2f;
-    private Vector3 velocity;
-    private Vector3 acceleration;
-    private Vector3 camPos;
+    protected Vector3 velocity;
+    protected Vector3 acceleration;
+    protected Vector3 camPos;
     public AudioClip punchAudio;
-    public SpawnMethod spawnMethod;
+    protected SpawnMethod spawnMethod;
 
-    private GameObject globalObj;
+    protected GameObject globalObj;
 
-    void Awake()
+    public virtual void FixedUpdate()
     {
-        float rand = Random.value;
-        if (rand < 0.6)
-        {
-            SpawnDirect();
-        }
-        else if (rand < 0.8)
-        {
-            SpawnZigZag();
-        }
-        else
-        {
-            SpawnComet();
-        }
+        UpdateVA();
     }
-
-    public void FixedUpdate()
-    {
-        velocity += acceleration * Time.fixedDeltaTime;
-        transform.position += velocity * Time.fixedDeltaTime;
-
-        if (spawnMethod == SpawnMethod.ZigZag)
-        {
-            if (transform.position.x > 1.5f || transform.position.x < -1.5f)
-            {
-                velocity.x = -velocity.x;
-                acceleration.x = -acceleration.x;
-            }
-        }
-    }
-
-    public
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("GameController"))
         {
-            AudioSource.PlayClipAtPoint(punchAudio, camPos + (transform.position - camPos).normalized * 7, 1.0f);
+            AudioSource.PlayClipAtPoint(punchAudio, camPos + (transform.position - camPos).normalized * 7, .5f);
 
             InputDevice device = InputDevices.GetDeviceAtXRNode(other.gameObject.name.Contains("Left") ? XRNode.LeftHand : XRNode.RightHand);
             HapticCapabilities capabilities;
@@ -67,7 +38,7 @@ public abstract class Item : MonoBehaviour
                 {
                     uint channel = 0;
                     float amplitude = 1.0f;
-                    float duration = 1.0f;
+                    float duration = 0.2f;
                     device.SendHapticImpulse(channel, amplitude, duration);
                 }
             }
@@ -102,45 +73,68 @@ public abstract class Item : MonoBehaviour
     public abstract void HandleGrab();
     public virtual void HandleEarthCollision() {}
 
-    private void SpawnDirect()
+    protected void UpdateVA()
     {
-        spawnMethod = SpawnMethod.Direct;
-        globalObj = GameObject.Find("GlobalObject");
-        float radius = 1.5f;
-        float theta = Random.Range(0.0f, 2 / 3 * Mathf.PI);
-        camPos = globalObj.GetComponent<ItemManager>().initialCameraPosition;
-        transform.position = new(radius * Mathf.Cos(theta), camPos.y + 3.0f, -radius * Mathf.Sin(theta));
+        velocity += acceleration * Time.fixedDeltaTime;
+        transform.position += velocity * Time.fixedDeltaTime;
 
-        Vector3 playerCenter = new Vector3(camPos.x, camPos.y / 2, camPos.z);
-        velocity = (playerCenter - transform.position).normalized * speed;
-
-        acceleration = new Vector3(0, -1, 0);
+        if (spawnMethod == SpawnMethod.ZigZag)
+        {
+            if (transform.position.x > 1.5f || transform.position.x < -1.5f)
+            {
+                velocity.x = -velocity.x;
+                acceleration.x = -acceleration.x;
+            }
+        }
+        else if (spawnMethod == SpawnMethod.Comet)
+        {
+            if (transform.position.x > 5f || transform.position.x < -5f)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
-    private void SpawnZigZag()
+    protected void SpawnDirect()
+    {
+        spawnMethod = SpawnMethod.Direct;
+
+        globalObj = GameObject.Find("GlobalObject");
+        float radius = 1.5f;
+        float theta = Random.Range(0.0f, 2.0f / 3 * Mathf.PI);
+        camPos = globalObj.GetComponent<ItemManager>().initialCameraPosition;
+        transform.position = new(camPos.x + radius * Mathf.Cos(theta), camPos.y + 1.0f, camPos.z - radius * Mathf.Sin(theta));
+
+        Vector3 playerCenter = new Vector3(camPos.x, camPos.y * 3.0f / 4, camPos.z);
+        velocity = (playerCenter - transform.position).normalized * speed;
+
+        acceleration = new Vector3(0, -0.1f, 0);
+    }
+
+    protected void SpawnZigZag()
     {
         spawnMethod = SpawnMethod.ZigZag;
 
         globalObj = GameObject.Find("GlobalObject");
         float radius = 1.5f;
         camPos = globalObj.GetComponent<ItemManager>().initialCameraPosition;
-        transform.position = new(0, camPos.y + 3.0f, -radius);
+        transform.position = new(0, camPos.y + 1.0f, -radius);
 
         bool toLeft = Random.value < 0.5;
-        velocity = (new Vector3(toLeft ? -1 : 1, -1, 1)).normalized * speed;
+        velocity = new Vector3(toLeft ? -2 : 2, -1, 1).normalized * speed;
 
-        acceleration = new Vector3(0, -1, 0);
+        acceleration = new Vector3(0, -0.1f, 0);
     }
 
-    private void SpawnComet()
+    protected void SpawnComet()
     {
         spawnMethod = SpawnMethod.Comet;
 
         bool fromLeft = Random.value < 0.5;
-        transform.position = new Vector3(fromLeft ? -10 : 10, 0, -3);
+        transform.position = new Vector3(fromLeft ? -5 : 5, camPos.y + .5f, -0.5f);
 
-        velocity = new Vector3(fromLeft ? 1 : -1, 1, 1).normalized * speed;
+        velocity = new Vector3(fromLeft ? 1 : -1, 0, 0).normalized * speed * 3;
 
-        acceleration = new Vector3(0, 2, 0);
+        acceleration = Vector3.zero;
     }
 }

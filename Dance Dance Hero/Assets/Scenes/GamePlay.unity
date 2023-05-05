@@ -1521,6 +1521,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.36144
       objectReference: {fileID: 0}
+    - target: {fileID: 5948525002046079667, guid: 48c1ceb4be6927f4cbcb41eff8d349bf,
+        type: 3}
+      propertyPath: volumeLayer.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 5948525002046079667, guid: 48c1ceb4be6927f4cbcb41eff8d349bf,
+        type: 3}
+      propertyPath: finalBlitToCameraTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5948525003513645125, guid: 48c1ceb4be6927f4cbcb41eff8d349bf,
         type: 3}
       propertyPath: m_Name

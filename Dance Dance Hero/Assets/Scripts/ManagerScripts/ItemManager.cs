@@ -5,7 +5,7 @@ using UnityEngine.Rendering.PostProcessing;
 public class ItemManager : MonoBehaviour
 {
     public GameObject sun, kryptonite;
-    public float recoverTime = 3.0f;
+    public float recoverTime = 5.0f;
     
     public Vector3 initialCameraPosition { get; private set; }
     public bool punishOffBeat { get; private set; }
@@ -15,6 +15,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private PostProcessVolume postfx;
     private ColorGrading cg;
+    private Bloom b;
 
     private OrbManager orbManager;
 
@@ -25,6 +26,7 @@ public class ItemManager : MonoBehaviour
         initialCameraPosition = GameObject.Find("Main Camera").transform.position;
         postfx = GameObject.Find("PostFX").GetComponent<PostProcessVolume>();
         postfx.profile.TryGetSettings(out cg);
+        postfx.profile.TryGetSettings(out b);
         orbManager = GameObject.Find("GlobalObject").GetComponent<OrbManager>();
     }
 
@@ -72,7 +74,8 @@ public class ItemManager : MonoBehaviour
 
     public void HandleGrabSun()
     {
-        cg.colorFilter.value = Color.red;
+        cg.tint.value = 100;
+        b.intensity.value = 20;
         punishOffBeat = false;
         punishOnBeat = false;
         GameObject.Find("Score").GetComponent<Score>().IncreaseScore(1);
@@ -81,7 +84,7 @@ public class ItemManager : MonoBehaviour
 
     public void HandleGrabKryptonite()
     {
-        cg.colorFilter.value = Color.green;
+        cg.colorFilter.value = Color.red;
         punishOffBeat = true;
         punishOnBeat = true;
         Invoke(nameof(RecoverPunishOnBeat), recoverTime);
@@ -89,7 +92,8 @@ public class ItemManager : MonoBehaviour
 
     private void RecoverPunishOffBeat()
     {
-        cg.colorFilter.value = Color.white;
+        cg.tint.value = 0;
+        b.intensity.value = 0;
         punishOffBeat = true;
     }
 

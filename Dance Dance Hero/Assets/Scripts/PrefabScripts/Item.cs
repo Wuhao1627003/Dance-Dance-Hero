@@ -28,7 +28,7 @@ public abstract class Item : MonoBehaviour
     {
         if (other.CompareTag("GameController"))
         {
-            AudioSource.PlayClipAtPoint(punchAudio, camPos + (transform.position - camPos).normalized * 7, .5f);
+            AudioSource.PlayClipAtPoint(punchAudio, camPos + (transform.position - camPos).normalized * 7, .55f);
 
             InputDevice device = InputDevices.GetDeviceAtXRNode(other.gameObject.name.Contains("Left") ? XRNode.LeftHand : XRNode.RightHand);
             HapticCapabilities capabilities;

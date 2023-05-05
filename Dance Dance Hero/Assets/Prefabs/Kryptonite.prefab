@@ -128,4 +128,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.7
-  punchAudio: {fileID: 8300000, guid: 63037cca2408be447888fff48f2c7afd, type: 3}
+  punchAudio: {fileID: 8300000, guid: 836dba8717cb54e4e8e10790bf7eed46, type: 3}

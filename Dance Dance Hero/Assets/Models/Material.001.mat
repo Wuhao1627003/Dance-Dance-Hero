@@ -8,13 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Material.001
-  m_Shader: {fileID: 4800000, guid: f6240b33bc97f104dbd21a484953d6a3, type: 3}
+  m_Shader: {fileID: 4800000, guid: 3116dc5d2d459014eb4d26279676bac8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _SGT_POWER_RGB
-  m_LightmapFlags: 4
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -50,6 +50,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _FlowTex:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Illum:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MKGlowTex:
+        m_Texture: {fileID: 2800000, guid: 83d8605e0a6bbb34b84c9fc2f50428ed, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -117,6 +125,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _EmissionLM: 0
     - _EnvironmentReflections: 1
     - _FlatShadingBlend: 0.9
     - _FlowStrength: 1
@@ -124,6 +133,8 @@ Material:
     - _Glossiness: 0.27272725
     - _GlossyReflections: 1
     - _HasFaceted: 0
+    - _MKGlowPower: 2.38
+    - _MKGlowTexStrength: 3.15
     - _MainWarp: 0.005
     - _Metallic: 0.868
     - _Mode: 0
@@ -164,6 +175,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 1, g: 0.84348786, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MKGlowColor: {r: 1, g: 0.62767327, b: 0, a: 1}
+    - _MKGlowTexColor: {r: 1, g: 0.8468186, b: 0, a: 1}
     - _NoiseColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 0.82920617, b: 0, a: 1}

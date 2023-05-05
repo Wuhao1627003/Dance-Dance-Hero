@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &431875286528304726
 MeshFilter:
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f658bc6cb212d764babc294570b62743, type: 2}
+  - {fileID: 2100000, guid: 98cb2507803c6634b9ca59df175dd2cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,7 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b707b42f06097db4a8864b260174e430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootAtPlayer: 1
   speed: 0.7
-  velocity: {x: 0, y: -1, z: 0}
   punchAudio: {fileID: 8300000, guid: 63037cca2408be447888fff48f2c7afd, type: 3}

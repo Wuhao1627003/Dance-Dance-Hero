@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!23 &-2292777454259116060
 MeshRenderer:
@@ -127,7 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c809090f33545ac4fb2cddb0b3c7fb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootAtPlayer: 1
   speed: 0.7
-  velocity: {x: 0, y: -1, z: 0}
-  punchAudio: {fileID: 8300000, guid: 63037cca2408be447888fff48f2c7afd, type: 3}
+  punchAudio: {fileID: 8300000, guid: 8bb1a3382eb9e844a97d8c15e8ae56bd, type: 3}

@@ -100,12 +100,13 @@ public abstract class Item : MonoBehaviour
         spawnMethod = SpawnMethod.Direct;
 
         globalObj = GameObject.Find("GlobalObject");
-        float radius = 1.5f;
+        float radius = 3.0f;
         float theta = Random.Range(0.0f, 2.0f / 3 * Mathf.PI);
         camPos = globalObj.GetComponent<ItemManager>().initialCameraPosition;
-        transform.position = new(camPos.x + radius * Mathf.Cos(theta), camPos.y + 1.0f, camPos.z - radius * Mathf.Sin(theta));
+        Vector2 randomPointOnCircle = Random.insideUnitCircle.normalized * radius;
+        transform.position = new(randomPointOnCircle.x, 3.0f, -1 * Mathf.Abs(randomPointOnCircle.y));
 
-        Vector3 playerCenter = new Vector3(camPos.x, camPos.y * 3.0f / 4, camPos.z);
+        Vector3 playerCenter = new Vector3(camPos.x, 2.5f, camPos.z);
         velocity = (playerCenter - transform.position).normalized * speed;
 
         acceleration = new Vector3(0, -0.1f, 0);
@@ -118,10 +119,10 @@ public abstract class Item : MonoBehaviour
         globalObj = GameObject.Find("GlobalObject");
         float radius = 1.5f;
         camPos = globalObj.GetComponent<ItemManager>().initialCameraPosition;
-        transform.position = new(0, camPos.y + 1.0f, -radius);
+        transform.position = new(0, 3.0f, -radius);
 
         bool toLeft = Random.value < 0.5;
-        velocity = new Vector3(toLeft ? -2 : 2, -1, 1).normalized * speed;
+        velocity = new Vector3(toLeft ? -2 : 2, -0.5f, 1).normalized * speed;
 
         acceleration = new Vector3(0, -0.1f, 0);
     }
@@ -131,7 +132,7 @@ public abstract class Item : MonoBehaviour
         spawnMethod = SpawnMethod.Comet;
 
         bool fromLeft = Random.value < 0.5;
-        transform.position = new Vector3(fromLeft ? -5 : 5, camPos.y + .5f, -0.5f);
+        transform.position = new Vector3(fromLeft ? -5 : 5, 1.5f, -0.5f);
 
         velocity = new Vector3(fromLeft ? 1 : -1, 0, 0).normalized * speed * 3;
 

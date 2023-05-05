@@ -29,7 +29,7 @@ public class SongController : MonoBehaviour {
 
     private GameObject orb;
     private float secondsPerBeat, clipLength, timeGood, timePerfect;
-    private float currentTime = 0.15f;
+    private float currentTime = 0.3f;
     private OrbManager orbManager;
     private ItemManager itemManager;
 

@@ -92,6 +92,12 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6718405674770199006}
     m_Modifications:
+    - target: {fileID: 1952609573309799280, guid: f78afbd22ae8def4f8a1df2ddf523316,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -1237840114967211545, guid: eb4a9dbd65aaef04b80adf5881412d4f,
+        type: 3}
     - target: {fileID: 2603808642806154020, guid: f78afbd22ae8def4f8a1df2ddf523316,
         type: 3}
       propertyPath: m_RootOrder
@@ -157,6 +163,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4555879508307000863, guid: f78afbd22ae8def4f8a1df2ddf523316,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 588162285004924686, guid: eb4a9dbd65aaef04b80adf5881412d4f,
+        type: 3}
+    - target: {fileID: 5099369847706619438, guid: f78afbd22ae8def4f8a1df2ddf523316,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -7357413187465370066, guid: eb4a9dbd65aaef04b80adf5881412d4f,
+        type: 3}
     - target: {fileID: 8613135544646664846, guid: f78afbd22ae8def4f8a1df2ddf523316,
         type: 3}
       propertyPath: m_Name

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public Canvas GUICanvas;
     public static int currHealth { get; private set; }
     private Text healthText;
 
@@ -29,8 +28,8 @@ public class Health : MonoBehaviour
         {
             currHealth = 0;
             // TODO: Game over
-            GUICanvas.gameObject.SetActive(true);
-            SceneManager.LoadScene("Menu");
+            GameObject.Find("FinalInfo").GetComponent<FinalInfo>().PrintFinalInfo(false);
+            Invoke(nameof(ReloadScene), 3.0f);
         }
     }
 
@@ -39,9 +38,8 @@ public class Health : MonoBehaviour
         currHealth = 100;
     }
 
-    private void OnGUI()
+    void ReloadScene()
     {
-        string displayText = "You lost :( \n Final score: " + Score.currScore.ToString();
-        GUI.Box(new Rect(0, 0, 10, 10), displayText);
+        SceneManager.LoadScene("Menu");
     }
 }

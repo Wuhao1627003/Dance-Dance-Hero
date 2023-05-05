@@ -109,7 +109,39 @@ public class SongController : MonoBehaviour {
 
     int stageUptownFunk(float remainingTime)
     {
-        // TODO
+
+        // Zone 1: 270 - 210 0
+        // Zone 2: 210 - 180 1
+        // Zone 3: 180 - 135 0
+        // Zone 5: 135 - 105 1
+        // Zone 6: 105 - 65 0
+        // Zone 7: 65 - 10 1
+        // Zone 10 : 10 - 0 0
+
+        if (remainingTime < 10)
+        {
+            return 0;
+        }
+        if (remainingTime < 65)
+        {
+            return 1;
+        }
+        if (remainingTime < 105)
+        {
+            return 0;
+        }
+        if (remainingTime < 135)
+        {
+            return 1;
+        }
+        if (remainingTime < 180)
+        {
+            return 0;
+        }
+        if (remainingTime < 210)
+        {
+            return 1;
+        }
         return 0;
     }
 
@@ -121,16 +153,24 @@ public class SongController : MonoBehaviour {
 
     int stageHero(float remainingTime)
     {
-        // Zone 1: 247 - 220 0
-        // Zone 2: 220 - 182 1
-        // Zone 3: 182 - 163 2
-        // Zone 5: 163 - 127 1
-        // Zone 6: 127 - 107 2
-        // Zone 7: 107 - 90 0
-        // Zone 8: 90 - 52 1
-        // Zone 9: 52 - 15 2
-        // Zone 10 : 15 - 0 0
-        if (remainingTime < 15)
+        // Zone 1: 196 - 166 2
+        // Zone 2: 166 - 126 0
+        // Zone 3: 126 - 82 1
+        // Zone 5: 82 - 56 0
+        // Zone 6: 56 - 36 2
+        // Zone 7: 36 - 21 0
+        // Zone 8: 21 - 5 2
+        // Zone 9: 5 - 0 0
+
+        if (remainingTime < 5)
+        {
+            return 0;
+        }
+        if (remainingTime < 21)
+        {
+            return 2;
+        }
+        if (remainingTime < 36)
         {
             return 0;
         }
@@ -138,32 +178,67 @@ public class SongController : MonoBehaviour {
         {
             return 2;
         }
-        if (remainingTime < 94)
-        {
-            return 1;
-        }
-        if (remainingTime < 111)
+        if (remainingTime < 82)
         {
             return 0;
         }
-        if (remainingTime < 131)
-        {
-            return 2;
-        }
-        if (remainingTime < 167)
+        if (remainingTime < 126)
         {
             return 1;
         }
-        if (remainingTime < 186)
+        if (remainingTime < 166)
+        {
+            return 0;
+        }
+        return 2;
+    }
+
+    int stageCloser(float remainingTime)
+    {
+        // Zone 1: 245 - 215 0
+        // Zone 2: 215 - 194 1
+        // Zone 3: 194 - 155 2
+        // Zone 5: 155 - 135 0
+        // Zone 6: 135 - 115 1
+        // Zone 7: 115 - 75 2
+        // Zone 8: 75 - 40 1
+        // Zone 9: 40 - 15 2
+        // Zone 10 : 15 - 0 0
+        if (remainingTime < 15)
+        {
+            return 0;
+        }
+        if (remainingTime < 40)
         {
             return 2;
         }
-        if (remainingTime < 224)
+        if (remainingTime < 75)
+        {
+            return 1;
+        }
+        if (remainingTime < 115)
+        {
+            return 2;
+        }
+        if (remainingTime < 135)
+        {
+            return 1;
+        }
+        if (remainingTime < 155)
+        {
+            return 0;
+        }
+        if (remainingTime < 194)
+        {
+            return 2;
+        }
+        if (remainingTime < 215)
         {
             return 1;
         }
         return 0;
     }
+
     void FixedUpdate() {
         currentTime += Time.fixedDeltaTime;
         if ((currentTime + timePerfect) % secondsPerBeat < Time.fixedDeltaTime)

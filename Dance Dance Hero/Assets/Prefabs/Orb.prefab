@@ -112,11 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7fe77f0293d89840846a0f42b9e3ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootAtPlayer: 1
   speed: 0.7
-  velocity: {x: 0, y: -1, z: 0}
   punchAudio: {fileID: 8300000, guid: 63037cca2408be447888fff48f2c7afd, type: 3}
-  hitEarthAudio: {fileID: 8300000, guid: be55700b6eaf96840ab69f3fd7e83b7d, type: 3}
+  hitEarthAudio: {fileID: 8300000, guid: 98b382a1d18cb0946a6cd3630c98fa60, type: 3}
   damage: 5
 --- !u!54 &1726975711845145495
 Rigidbody:

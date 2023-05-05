@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class TimeLeft : MonoBehaviour
 {
+    public Canvas GUICanvas;
     public static long secondsLeft { get; private set; }
     private long lastTime;
     private Text timeText;
@@ -32,9 +33,14 @@ public class TimeLeft : MonoBehaviour
         if (secondsLeft <= 0)
         {
             // TODO: End game and show score
-
+            GUICanvas.gameObject.SetActive(true);
             SceneManager.LoadScene("Menu");
         }
         timeText.text = "Time left: " + minutes.ToString() + "m " + seconds.ToString() + "s";
+    }
+
+    private void OnGUI()
+    {
+
     }
 }

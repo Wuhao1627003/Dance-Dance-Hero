@@ -36,7 +36,7 @@ public class Orb : Item
 
     public override void HandleEarthCollision()
     {
-        AudioSource.PlayClipAtPoint(hitEarthAudio, gameObject.transform.position, 0.3f);
+        AudioSource.PlayClipAtPoint(hitEarthAudio, gameObject.transform.position);
         GameObject.Find("Health").GetComponent<Health>().DecreaseHealth(damage);
     }
 }

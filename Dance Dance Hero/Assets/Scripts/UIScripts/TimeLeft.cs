@@ -11,31 +11,37 @@ public class TimeLeft : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioSource audio = GameObject.Find("GlobalObject").GetComponent<AudioSource>();
-        secondsLeft = (long)audio.clip.length;
-        timeText = GetComponent<Text>();
-        long minutes = secondsLeft / 60;
-        long seconds = secondsLeft % 60;
-        timeText.text = "Time left: " + minutes.ToString() + "m " + seconds.ToString() + "s";
-        lastTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerSecond;
+        if (SceneManager.GetActiveScene().name == "GamePlay")
+        {
+            AudioSource audio = GameObject.Find("GlobalObject").GetComponent<AudioSource>();
+            secondsLeft = (long)audio.clip.length;
+            timeText = GetComponent<Text>();
+            long minutes = secondsLeft / 60;
+            long seconds = secondsLeft % 60;
+            timeText.text = "Time left: " + minutes.ToString() + "m " + seconds.ToString() + "s";
+            lastTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerSecond;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        long currentTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerSecond;
-        long elapsedTime = currentTime - lastTime;
-        secondsLeft -= elapsedTime;
-        lastTime = currentTime;
-        long minutes = secondsLeft / 60;
-        long seconds = secondsLeft % 60;
-        if (secondsLeft <= 0)
+        if(SceneManager.GetActiveScene().name == "GamePlay")
         {
-            // TODO: End game and show score
-            GameObject.Find("FinalInfo").GetComponent<FinalInfo>().PrintFinalInfo(true);
-            Invoke(nameof(ReloadScene), 3.0f);
+            long currentTime = System.DateTime.Now.Ticks / System.TimeSpan.TicksPerSecond;
+            long elapsedTime = currentTime - lastTime;
+            secondsLeft -= elapsedTime;
+            lastTime = currentTime;
+            long minutes = secondsLeft / 60;
+            long seconds = secondsLeft % 60;
+            if (secondsLeft <= 0)
+            {
+                // TODO: End game and show score
+                GameObject.Find("FinalInfo").GetComponent<FinalInfo>().PrintFinalInfo(true);
+                Invoke(nameof(ReloadScene), 3.0f);
+            }
+            timeText.text = "Time left: " + minutes.ToString() + "m " + seconds.ToString() + "s";
         }
-        timeText.text = "Time left: " + minutes.ToString() + "m " + seconds.ToString() + "s";
     }
 
     void ReloadScene()

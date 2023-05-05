@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour
@@ -15,7 +16,10 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + currScore.ToString();
+        if (SceneManager.GetActiveScene().name == "GamePlay")
+        {
+            scoreText.text = "Score: " + currScore.ToString();
+        }
     }
 
     public void IncreaseScore(int score)

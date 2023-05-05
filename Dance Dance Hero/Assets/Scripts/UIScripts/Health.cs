@@ -17,7 +17,10 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + currHealth.ToString();
+        if (SceneManager.GetActiveScene().name == "GamePlay")
+        {
+            healthText.text = "Health: " + currHealth.ToString();
+        }
     }
 
     public void DecreaseHealth(int damage)

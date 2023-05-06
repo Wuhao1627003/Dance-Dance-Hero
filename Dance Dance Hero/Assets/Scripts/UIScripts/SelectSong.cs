@@ -7,7 +7,10 @@ public class SelectSong : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        SongSelectionController.songSelected = songSelected;
-        SceneManager.LoadScene("GamePlay");
+        if (other.CompareTag("GameController"))
+        {
+            SongSelectionController.songSelected = songSelected;
+            SceneManager.LoadScene("GamePlay");
+        }
     }
 }

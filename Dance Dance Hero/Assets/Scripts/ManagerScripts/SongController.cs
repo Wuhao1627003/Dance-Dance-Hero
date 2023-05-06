@@ -37,6 +37,7 @@ public class SongController : MonoBehaviour {
     public AudioClip one, two, three, poor, good, perfect;
 
     private GameObject globalObj;
+    public AudioClip[] songs;
 
     public Performance performance { get; private set; }
 
@@ -44,6 +45,8 @@ public class SongController : MonoBehaviour {
         globalObj = GameObject.Find("GlobalObject");
 
         audioSource = globalObj.GetComponent<AudioSource>();
+
+        audioSource.clip = songs[SongSelectionController.songSelected - 1];
 
         performance = Performance.Poor;
         orb = GameObject.Find("Orb");

@@ -650,6 +650,11 @@ MonoBehaviour:
   poor: {fileID: 8300000, guid: c1a0a244280d05f4c8d23f1ab32e02b8, type: 3}
   good: {fileID: 8300000, guid: b5d4f401a6cc83547ab4b843e2f12a39, type: 3}
   perfect: {fileID: 8300000, guid: 217e6a8ede505d949b11fd82caa5e41e, type: 3}
+  songs:
+  - {fileID: 8300000, guid: a5283d9985359dd429f58ea3c825c0a1, type: 3}
+  - {fileID: 8300000, guid: 147eab9184de04d4e9f82a41820cde5e, type: 3}
+  - {fileID: 8300000, guid: ce9f728a1d799784c8bea46534bfefc4, type: 3}
+  - {fileID: 8300000, guid: 2fd2616fee3cea647a026cfd9f115ffa, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
